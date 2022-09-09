@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background: #4c4c4c;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
 .card {
   position: absolute;
   top: 50%;

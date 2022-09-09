@@ -2,19 +2,22 @@
   "name": "nabung-yaso",
   "version": "1.0.0",
   "description": "untuk nabung uang",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "nodemon src/app.js",
-    "db-create": "npx sequelize-cli db:create",
+    "build": "yarn && npm-run-all tailwind:build start",
+    "db:create": "npx sequelize-cli db:create",
     "db:drop": "npx sequelize-cli db:drop",
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:migrate:refresh": "npx sequelize-cli db:migrate:undo:all",
     "db:seed": "npx sequelize-cli db:seed:all",
-    "db:reset": "yarn && npm-run-all db:drop db:create db:migrate db:seed"
+    "db:reset": "yarn && npm-run-all db:drop db:create db:migrate db:seed",
+    "tailwind:build": "tailwindcss build -i public/assets/css/tailwind.config.css -o public/assets/css/tailwind.css"
   },
   "author": "smk yadika soreang",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^10.4.8",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
@@ -23,9 +26,13 @@
     "express": "^4.18.1",
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.19",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "sequelize": "^6.21.5",
-    "sequelize-cli": "^6.4.1"
+    "sequelize-cli": "^6.4.1",
+    "tailwindcss": "^3.1.8"
   }
 }
