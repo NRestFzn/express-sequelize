@@ -1,0 +1,31 @@
+{
+  "name": "nabung-yaso",
+  "version": "1.0.0",
+  "description": "untuk nabung uang",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "db-create": "npx sequelize-cli db:create",
+    "db:drop": "npx sequelize-cli db:drop",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:migrate:refresh": "npx sequelize-cli db:migrate:undo:all",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "db:reset": "yarn && npm-run-all db:drop db:create db:migrate db:seed"
+  },
+  "author": "smk yadika soreang",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "sequelize": "^6.21.5",
+    "sequelize-cli": "^6.4.1"
+  }
+}

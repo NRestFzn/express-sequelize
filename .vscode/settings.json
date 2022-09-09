@@ -1,0 +1,9 @@
+{
+  "workbench.colorCustomizations": {
+    "editor.selectionBackground": "#7c5bb0",
+    "editor.selectionHighlightBackground": "#625478",
+    "editor.hoverHighlightBackground": "#625478"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}
