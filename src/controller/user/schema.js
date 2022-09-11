@@ -6,14 +6,24 @@ const registerSchema = yup.object({
   email: yup.string().email('email invalid').required('email harus di isi!'),
   password: yup
     .string()
-    .min(8, 'password minimal berisi 8 karakter')
-    .required('password harus di isi!'),
+    .required('password harus di isi!')
+    .min(8, 'password minimal 8 karakter')
+    .oneOf([yup.ref('password')], 'password tidak sama!'),
   confirmPassword: yup
     .string()
-    .min(8, 'confirm password minimal berisi 8 karakter')
-    .required('confirm password harus di isi!'),
+    .required('confirm password harus di isi!')
+    .min(8, 'password minimal 8 karakter')
+    .oneOf([yup.ref('password')], 'password tidak sama!'),
 })
 
-const userSchema = { registerSchema }
+const loginSchema = yup.object({
+  username: yup.string().required('username atau email harus di isi!'),
+  password: yup
+    .string()
+    .min(8, 'password harus berisi 8 karakter')
+    .required('password harus di isi!'),
+})
+
+const userSchema = { registerSchema, loginSchema }
 
 module.exports = userSchema

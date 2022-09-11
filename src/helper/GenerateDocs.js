@@ -87,7 +87,7 @@ module.exports = function generateDocs(app) {
         },
       },
       info: {
-        title: 'Yaso Nabung App Documentation',
+        title: 'Express, Node Js & Sequelize template for my self',
         version: '1.0.0',
       },
       paths: docsSources,

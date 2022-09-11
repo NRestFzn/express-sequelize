@@ -44,7 +44,19 @@ module.exports = {
         },
       },
     },
+    get: {
+      tags: ['User'],
+      summary: 'Get all user',
+      security: [],
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'Get all user',
+        },
+      },
+    },
   },
+
   '/user/{id}': {
     get: {
       tags: ['User'],
@@ -64,6 +76,154 @@ module.exports = {
       responses: {
         200: {
           description: 'Get user by id',
+        },
+      },
+    },
+    put: {
+      tags: ['User'],
+      summary: 'update user by id',
+      security: [],
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          schema: {
+            type: 'integer',
+          },
+          example: 1,
+        },
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          'application/x-www-form-urlencoded': {
+            schema: {
+              type: 'object',
+              properties: {
+                username: {
+                  type: 'string',
+                },
+                fullname: {
+                  type: 'string',
+                },
+                email: {
+                  type: 'string',
+                },
+              },
+              required: ['username', 'email', 'fullname'],
+            },
+          },
+        },
+      },
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'force delete user by id',
+        },
+      },
+    },
+  },
+
+  '/softdelete/user/{id}': {
+    delete: {
+      tags: ['User'],
+      summary: 'soft delete user by id',
+      security: [],
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          schema: {
+            type: 'integer',
+          },
+          example: 1,
+        },
+      ],
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'soft delete user by id',
+        },
+      },
+    },
+  },
+
+  '/forcedelete/user/{id}': {
+    delete: {
+      tags: ['User'],
+      summary: 'force delete user by id',
+      security: [],
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          schema: {
+            type: 'integer',
+          },
+          example: 1,
+        },
+      ],
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'force delete user by id',
+        },
+      },
+    },
+  },
+
+  '/restore/user/{id}': {
+    put: {
+      tags: ['User'],
+      summary: 'restore deleted user by id',
+      security: [],
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          schema: {
+            type: 'integer',
+          },
+          example: 1,
+        },
+      ],
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'restore deleted user by id',
+        },
+      },
+    },
+  },
+
+  '/login': {
+    post: {
+      tags: ['User'],
+      summary: 'User login',
+      security: [],
+      requestBody: {
+        required: true,
+        content: {
+          'application/x-www-form-urlencoded': {
+            schema: {
+              type: 'object',
+              properties: {
+                username: {
+                  type: 'string',
+                },
+
+                password: {
+                  type: 'string',
+                },
+              },
+              required: ['username', 'password'],
+            },
+          },
+        },
+      },
+      responses: {
+        201: {
+          description: 'User login',
         },
       },
     },

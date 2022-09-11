@@ -1,7 +1,7 @@
 {
   "name": "nabung-yaso",
   "version": "1.0.0",
-  "description": "untuk nabung uang",
+  "description": "template express & nodejs for my self",
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon src/app.js",
@@ -14,7 +14,7 @@
     "db:reset": "yarn && npm-run-all db:drop db:create db:migrate db:seed",
     "tailwind:build": "tailwindcss build -i public/assets/css/tailwind.config.css -o public/assets/css/tailwind.css"
   },
-  "author": "smk yadika soreang",
+  "author": "liz",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.4.8",
