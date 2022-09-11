@@ -1,4 +1,4 @@
-<h1 align="center">Saving Money App</html>
+
 
 ##Cara Pemakaian
 
