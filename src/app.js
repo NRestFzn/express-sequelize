@@ -6,6 +6,7 @@ const app = express()
 const path = require('path')
 const ejs = require('ejs')
 const router = require('./router/v1.js')
+const generateDocs = require('./helper/GenerateDocs')
 require('dotenv').config()
 const { APP_PORT } = process.env
 
@@ -18,6 +19,7 @@ app.use('/v1', router)
 app.engine('ejs', ejs.renderFile)
 app.set('views', path.join(`${__dirname}/../public/views`))
 app.set('view engine', 'ejs')
+generateDocs(app)
 
 app.listen(APP_PORT, () => {
   console.log(`Listening at port ${APP_PORT}`)
