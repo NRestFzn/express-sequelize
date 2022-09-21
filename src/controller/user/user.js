@@ -7,11 +7,31 @@ const jwt = require('jsonwebtoken')
 const { Op } = require('sequelize')
 const { user } = models
 const { SECRET_ACCESS_TOKEN } = process.env
+const MainMiddleware = require('../../middleware/usermiddleware')
 
 router.get('/user', async (req, res) => {
   const data = await user.findAll({})
   const total = await user.count({})
   res.status(200).json({ message: 'success', total, data })
+})
+
+router.get('/user/me', MainMiddleware.EnsureTokenPublic, async (req, res) => {
+  const data = req.user
+  res.status(200).json({ Message: 'success', data })
+})
+
+router.put('/user/me', MainMiddleware.EnsureTokenPublic, async (req, res) => {
+  const { username, fullname, email } = req.body
+  const dbUser = req.user
+  const data = await user.update(
+    {
+      username,
+      fullname,
+      email,
+    },
+    { where: { id: dbUser.id } }
+  )
+  res.status(200).json({ Message: 'user berhasil di update' })
 })
 
 router.get('/user/:id', async (req, res) => {
@@ -74,7 +94,9 @@ router.post('/login', validator(userSchema.loginSchema), async (req, res) => {
     return res.status(401).json({ Message: 'password salah!' })
   }
   const payload = { data }
-  const token = jwt.sign(payload, SECRET_ACCESS_TOKEN, { expiresIn: '7d' })
+  const token = jwt.sign(payload, SECRET_ACCESS_TOKEN, {
+    expiresIn: '7d',
+  })
   res.status(200).json({ Message: 'success', token })
 })
 

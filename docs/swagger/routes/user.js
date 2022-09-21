@@ -124,6 +124,52 @@ module.exports = {
     },
   },
 
+  '/user/me': {
+    put: {
+      tags: ['User'],
+      summary: 'Update data user itself with token',
+      security: [{ tokenpublic: [] }],
+      requestBody: {
+        required: true,
+        content: {
+          'application/x-www-form-urlencoded': {
+            schema: {
+              type: 'object',
+              properties: {
+                username: {
+                  type: 'string',
+                },
+                fullname: {
+                  type: 'string',
+                },
+                email: {
+                  type: 'string',
+                },
+              },
+              required: ['username', 'email', 'fullname'],
+            },
+          },
+        },
+      },
+      responses: {
+        201: {
+          description: 'Update data user itself with token',
+        },
+      },
+    },
+    get: {
+      tags: ['User'],
+      summary: 'Get user by token',
+      security: [{ tokenpublic: [] }],
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'Get user by token',
+        },
+      },
+    },
+  },
+
   '/softdelete/user/{id}': {
     delete: {
       tags: ['User'],
