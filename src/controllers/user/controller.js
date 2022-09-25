@@ -5,7 +5,7 @@ const userSchema = require('./schema')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { Op } = require('sequelize')
-const { user } = models
+const { user, activities } = models
 const { SECRET_ACCESS_TOKEN } = process.env
 const MainMiddleware = require('../../middleware/usermiddleware')
 
@@ -16,7 +16,11 @@ router.get('/user', async (req, res) => {
 })
 
 router.get('/user/me', MainMiddleware.EnsureTokenPublic, async (req, res) => {
-  const data = req.user
+  const dbUser = req.user
+  const data = await user.findOne({
+    where: { id: dbUser.id },
+    include: [{ model: activities }],
+  })
   res.status(200).json({ Message: 'success', data })
 })
 

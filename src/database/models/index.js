@@ -1,19 +1,12 @@
 const user = require('./user')
+const activities = require('./activity')
 
 const models = {
   user,
+  activities,
 }
 
 // relation
-// User.belongsTo(Role, { foreignKey: 'RoleId' })
+user.hasMany(activities, { foreignKey: 'userId' })
 
 module.exports = models
-
-// export type MyModels = typeof models
-
-// Object.entries(models).map(([, model]) => {
-//   if (model?.associate) {
-//     model.associate(models)
-//   }
-//   return model
-// })

@@ -8,7 +8,6 @@ const ejs = require('ejs')
 const router = require('./router/v1.js')
 const generateDocs = require('./helper/GenerateDocs')
 const logger = require('morgan')
-const createError = require('http-errors')
 require('dotenv').config()
 const { APP_PORT } = process.env
 
@@ -24,15 +23,11 @@ app.set('views', path.join(`${__dirname}/../public/views`))
 app.set('view engine', 'ejs')
 generateDocs(app)
 
-// error not found
-app.use(function (req, res, next) {
-  console.log('url not found \n\n\n\n\n\n\n')
-
-  next(createError(404))
+// error if url not found
+app.get('*', function (req, res) {
+  res.status(404).json({ Message: 'url not found' })
 })
 
 app.listen(APP_PORT, () => {
   console.log(`Listening at port ${APP_PORT}`)
 })
-
-app.use(express.json)

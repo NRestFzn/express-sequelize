@@ -7,4 +7,5 @@ router.get('/', function (req, res) {
 
 module.exports = router
 
-require('../controller/user/user')
+require('../controllers/user/controller')
+require('../controllers/activity/controller')
