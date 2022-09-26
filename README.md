@@ -5,7 +5,7 @@
 clone dengan `https` / `ssh` / `github cli`
 
 ```sh
-git clone https://github.com/justRizu/saving-money-app.git
+git clone https://github.com/justRizu/daily-activity.git
 ```
 
 Kalau sudah di clone buat file dengan nama .env,
