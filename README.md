@@ -28,7 +28,7 @@ npm run start
 
 atau
 
-npm run build <- running sekaligus build tailwindcss
+yarn start 
 ```
 
 ##Necessary
