@@ -1,5 +1,5 @@
 module.exports = {
-  '/user': {
+  'user/register': {
     post: {
       tags: ['User'],
       summary: 'Create new user',
@@ -39,11 +39,13 @@ module.exports = {
         },
       },
       responses: {
-        201: {
-          description: 'Create new user',
+        200: {
+          description: 'OK',
         },
       },
     },
+  },
+  '/user': {
     get: {
       tags: ['User'],
       summary: 'Get all user',
@@ -51,7 +53,7 @@ module.exports = {
       produces: ['application/json'],
       responses: {
         200: {
-          description: 'Get all user',
+          description: 'OK',
         },
       },
     },
@@ -75,10 +77,27 @@ module.exports = {
       produces: ['application/json'],
       responses: {
         200: {
-          description: 'Get user by id',
+          description: 'OK',
         },
       },
     },
+  },
+
+  'user/me': {
+    get: {
+      tags: ['User'],
+      summary: 'Get user by token',
+      security: [{ tokenpublic: [] }],
+      produces: ['application/json'],
+      responses: {
+        200: {
+          description: 'OK',
+        },
+      },
+    },
+  },
+
+  'user/update/{id}': {
     put: {
       tags: ['User'],
       summary: 'update user by id',
@@ -118,13 +137,13 @@ module.exports = {
       produces: ['application/json'],
       responses: {
         200: {
-          description: 'force delete user by id',
+          description: 'OK',
         },
       },
     },
   },
 
-  '/user/me': {
+  '/user/me/update': {
     put: {
       tags: ['User'],
       summary: 'Update data user itself with token',
@@ -153,24 +172,43 @@ module.exports = {
       },
       responses: {
         201: {
-          description: 'Update data user itself with token',
-        },
-      },
-    },
-    get: {
-      tags: ['User'],
-      summary: 'Get user by token',
-      security: [{ tokenpublic: [] }],
-      produces: ['application/json'],
-      responses: {
-        200: {
-          description: 'Get user by token',
+          description: 'OK',
         },
       },
     },
   },
 
-  '/softdelete/user/{id}': {
+  '/user/upload-photo': {
+    put: {
+      tags: ['User'],
+      summary: 'Upload photo',
+      security: [{ tokenpublic: [] }],
+      requestBody: {
+        required: true,
+        content: {
+          'multipart/form-data': {
+            schema: {
+              type: 'object',
+              properties: {
+                image: {
+                  type: 'string',
+                  format: 'binary',
+                },
+              },
+              required: ['image'],
+            },
+          },
+        },
+      },
+      responses: {
+        201: {
+          description: 'OK',
+        },
+      },
+    },
+  },
+
+  '/user/softdelete/{id}': {
     delete: {
       tags: ['User'],
       summary: 'soft delete user by id',
@@ -188,13 +226,13 @@ module.exports = {
       produces: ['application/json'],
       responses: {
         200: {
-          description: 'soft delete user by id',
+          description: 'OK',
         },
       },
     },
   },
 
-  '/forcedelete/user/{id}': {
+  '/user/forcedelete/{id}': {
     delete: {
       tags: ['User'],
       summary: 'force delete user by id',
@@ -212,13 +250,13 @@ module.exports = {
       produces: ['application/json'],
       responses: {
         200: {
-          description: 'force delete user by id',
+          description: 'OK',
         },
       },
     },
   },
 
-  '/restore/user/{id}': {
+  '/user/restore/{id}': {
     put: {
       tags: ['User'],
       summary: 'restore deleted user by id',
@@ -236,7 +274,7 @@ module.exports = {
       produces: ['application/json'],
       responses: {
         200: {
-          description: 'restore deleted user by id',
+          description: 'OK',
         },
       },
     },
@@ -269,7 +307,7 @@ module.exports = {
       },
       responses: {
         201: {
-          description: 'User login',
+          description: 'OK',
         },
       },
     },

@@ -23,6 +23,10 @@ module.exports = {
         format: 'password',
       },
 
+      image: {
+        type: 'string',
+      },
+
       createdAt: {
         type: 'string',
         format: 'date-time',

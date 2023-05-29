@@ -1,5 +1,3 @@
-
-
 ##Cara Pemakaian
 
 clone dengan `https` / `ssh` / `github cli`
@@ -28,7 +26,7 @@ npm run start
 
 atau
 
-yarn start 
+yarn start
 ```
 
 ##Necessary
@@ -40,8 +38,12 @@ npm run db:drop <- hapus database
 npm run db:migrate:refresh <- migrasi ulang model ke database jika ada perubahan
 npm run db:reset <- melakuan 4 perintah diatas sekaligus
 npm run tailwind:build <- melakukan build pada css yang berbentuk tailwind
+```
 
-note : jika menggunakan yarn tidak perlu menggunakan  kata run
+##Work in progress
+
+```sh
+Crud for activity and more features
 ```
 
 ##Note
