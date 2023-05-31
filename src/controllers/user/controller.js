@@ -9,8 +9,9 @@ const { user, activities } = models
 const { SECRET_ACCESS_TOKEN } = process.env
 const MainMiddleware = require('../../middleware/usermiddleware')
 const upload = require('../../middleware/multer')
+const AdminMiddleware = require('../../middleware/adminmiddleware')
 
-router.get('/user', async (req, res) => {
+router.get('/user', AdminMiddleware.EnsureTokenAdmin, async (req, res) => {
   const data = await user.findAll({})
   const total = await user.count({})
   res.status(200).json({ message: 'success', total, data })
@@ -43,7 +44,7 @@ router.put(
   }
 )
 
-router.get('/user/:id', async (req, res) => {
+router.get('/user/:id', AdminMiddleware.EnsureTokenAdmin, async (req, res) => {
   const data = await user.findByPk(req.params.id, {
     attributes: { exclude: ['password'] },
   })
@@ -87,7 +88,7 @@ router.put('/user/update:id', async (req, res) => {
   if (!existingUser) {
     return res.status(404).json({ Message: 'user not found' })
   }
-  const data = await user.update(
+  const data = await existingUser.update(
     { username, fullname, email },
     { where: { id: existingUser.id } }
   )
@@ -130,33 +131,45 @@ router.post('/login', validator(userSchema.loginSchema), async (req, res) => {
   res.status(200).json({ Message: 'success', token })
 })
 
-router.delete('/user/softdelete/:id', async (req, res) => {
-  const data = await user.destroy({
-    where: { id: req.params.id },
-  })
-  if (!data) {
-    return res.status(404).json({ Message: 'user not found' })
+router.delete(
+  '/user/softdelete/:id',
+  AdminMiddleware.EnsureTokenAdmin,
+  async (req, res) => {
+    const data = await user.destroy({
+      where: { id: req.params.id },
+    })
+    if (!data) {
+      return res.status(404).json({ Message: 'user not found' })
+    }
+    res.status(200).json({ Message: 'user berhasil dihapus' })
   }
-  res.status(200).json({ Message: 'user berhasil dihapus' })
-})
+)
 
-router.delete('/user/forcedelete/:id', async (req, res) => {
-  const data = await user.destroy({
-    where: { id: req.params.id },
-    force: true,
-  })
-  if (!data) {
-    return res.status(404).json({ Message: 'user not found' })
+router.delete(
+  '/user/forcedelete/:id',
+  AdminMiddleware.EnsureTokenAdmin,
+  async (req, res) => {
+    const data = await user.destroy({
+      where: { id: req.params.id },
+      force: true,
+    })
+    if (!data) {
+      return res.status(404).json({ Message: 'user not found' })
+    }
+    res.status(200).json({ Message: 'user berhasil dihapus' })
   }
-  res.status(200).json({ Message: 'user berhasil dihapus' })
-})
+)
 
-router.put('/user/restore/:id', async (req, res) => {
-  const data = await user.restore({
-    where: { id: req.params.id },
-  })
-  if (!data) {
-    return res.status(404).json({ Message: 'user not found' })
+router.put(
+  '/user/restore/:id',
+  AdminMiddleware.EnsureTokenAdmin,
+  async (req, res) => {
+    const data = await user.restore({
+      where: { id: req.params.id },
+    })
+    if (!data) {
+      return res.status(404).json({ Message: 'user not found' })
+    }
+    res.status(200).json({ Message: 'user berhasil di pulihkan' })
   }
-  res.status(200).json({ Message: 'user berhasil di pulihkan' })
-})
+)

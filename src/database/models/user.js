@@ -10,6 +10,7 @@ user.init(
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     image: DataTypes.STRING,
+    role: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     deletedAt: DataTypes.DATE,
