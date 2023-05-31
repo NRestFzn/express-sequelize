@@ -32,6 +32,7 @@ yarn start
 ##Necessary
 
 ```sh
+http://localhost:8000/v1/api-docs <- dokumentasi swagger
 npm run db:create <- buat database
 npm run db:migrate <- migrasi model ke database
 npm run db:drop <- hapus database
