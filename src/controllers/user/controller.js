@@ -74,6 +74,7 @@ router.post(
       fullname,
       email,
       password: hashPassword,
+      registerWith: 'form',
     })
     const createdMessage = 'akun berhasil dibuat'
     res.status(201).json({ message: 'success', createdMessage })

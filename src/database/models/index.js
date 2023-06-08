@@ -1,5 +1,6 @@
 const user = require('./user')
 const activities = require('./activity')
+const linkedAccount = require('./LinkedAccount')
 
 const models = {
   user,

@@ -11,6 +11,7 @@ user.init(
     password: DataTypes.STRING,
     image: DataTypes.STRING,
     role: DataTypes.STRING,
+    registerWith: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     deletedAt: DataTypes.DATE,

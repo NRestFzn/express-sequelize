@@ -27,6 +27,9 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: 'user',
       },
+      registerWith: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

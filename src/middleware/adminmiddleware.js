@@ -4,7 +4,7 @@ const { SECRET_ACCESS_TOKEN } = process.env
 
 const EnsureTokenAdmin = (req, res, next) => {
   const tokenAdmin = req.headers.tokenadmin
-  if (tokenPublic) {
+  if (tokenAdmin) {
     jwt.verify(tokenPublic, SECRET_ACCESS_TOKEN, async function (err, decoded) {
       if (err) {
         if (err.name === 'TokenExpiredError') {
