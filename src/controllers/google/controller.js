@@ -10,37 +10,21 @@ const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID)
 
 routes.get('/auth/google', async (req, res) => {
-  const { code, register, sync } = req.query
-  let redirect_uri
-  if (register) {
-    redirect_uri = process.env.GOOGLE_OAUTH_REGISTER_URL
-  } else if (sync) {
-    redirect_uri = process.env.GOOGLE_OAUTH_SYNC_URL
-  } else {
-    redirect_uri = process.env.GOOGLE_OAUTH_LOGIN_URL
-  }
-  const { access_token, id_token } = await ServiceGoogle.getGoogleOAuthTokens(
-    code,
-    redirect_uri
+  const { code, register } = req.query
+
+  const googleToken = await ServiceGoogle.getGoogleOAuthTokens(code, register)
+
+  const googleUser = await ServiceGoogle.getGoogleUser(
+    googleToken.id_token,
+    googleToken.access_token
   )
-  const googleUser = await ServiceGoogle.getGoogleUser(id_token, access_token)
-  const ticket = await client.verifyIdToken({
-    idToken: id_token,
-    audience: process.env.GOOGLE_OAUTH_CLIENT_ID,
-  })
-  const googlePayload = ticket.getPayload()
-  const googleUserId = googlePayload.sub
-  let dbUser = await user.findOne({
+  let data = await user.findOne({
     where: {
-      [Op.or]: {
-        email: googleUser.email,
-        googleId: googleUserId,
-      },
+      email: googleUser.email,
     },
   })
-
-  if (register && !dbUser) {
-    dbUser = await user.create({
+  if (register && !data) {
+    data = await user.create({
       fullname: googleUser.name,
       email: googleUser.email,
       image: googleUser.picture,
@@ -48,10 +32,10 @@ routes.get('/auth/google', async (req, res) => {
     })
   }
 
-  if (!dbUser) {
+  if (!data) {
     return res.json({ Message: 'user not found. ' })
   }
-  const payload = { dbUser }
+  const payload = { data }
   const token = jwt.sign(payload, process.env.SECRET_ACCESS_TOKEN, {
     expiresIn: '7d',
   })
