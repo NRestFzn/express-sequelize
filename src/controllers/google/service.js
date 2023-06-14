@@ -2,7 +2,7 @@ const axios = require('axios')
 const models = require('../../database/models')
 
 const ServiceGoogle = {
-  getGoogleOAuthTokens: async (code, register) => {
+  getGoogleOAuthTokens: async (register, code) => {
     const token = 'https://oauth2.googleapis.com/token'
     try {
       const { data } = await axios.post(token, {

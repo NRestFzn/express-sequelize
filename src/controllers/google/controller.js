@@ -10,21 +10,23 @@ const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID)
 
 routes.get('/auth/google', async (req, res) => {
-  const { code, register } = req.query
-
-  const googleToken = await ServiceGoogle.getGoogleOAuthTokens(code, register)
+  const code = req.query.code
+  const register = req.query.register
+  const sync = req.query.sync
+  if (register) {
+    console.log('ngakses yang register')
+  }
+  const googleToken = await ServiceGoogle.getGoogleOAuthTokens(register, code)
 
   const googleUser = await ServiceGoogle.getGoogleUser(
     googleToken.id_token,
     googleToken.access_token
   )
-  let data = await user.findOne({
-    where: {
-      email: googleUser.email,
-    },
-  })
+
+  let data = await models.user.findOne({ where: { email: googleUser.email } })
+
   if (register && !data) {
-    data = await user.create({
+    data = await models.user.create({
       fullname: googleUser.name,
       email: googleUser.email,
       image: googleUser.picture,

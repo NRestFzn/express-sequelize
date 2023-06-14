@@ -77,7 +77,11 @@ router.post(
       registerWith: 'form',
     })
     const createdMessage = 'akun berhasil dibuat'
-    res.status(201).json({ message: 'success', createdMessage })
+    const payload = { data }
+    const token = jwt.sign(payload, SECRET_ACCESS_TOKEN, {
+      expiresIn: '7d',
+    })
+    res.status(201).json({ message: 'success', createdMessage, token })
   }
 )
 
