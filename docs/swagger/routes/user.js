@@ -1,5 +1,5 @@
 module.exports = {
-  'user/register': {
+  '/user/register': {
     post: {
       tags: ['User'],
       summary: 'Create new user',

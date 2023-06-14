@@ -5,9 +5,10 @@ const validator = require('../../middleware/validation')
 const schema = require('./schema')
 const MainMiddleware = require('../../middleware/usermiddleware')
 const dateFormater = require('../../helper/DateFormater')
+const { Op } = require('sequelize')
 
 router.post(
-  '/activity',
+  '/activity/create',
   MainMiddleware.EnsureTokenPublic,
   validator(schema.createActivity),
   async (req, res) => {
@@ -20,12 +21,12 @@ router.post(
       isImportant,
       activityDate: specifiedTime,
     })
-    res.status(201).json({ Message: 'catatan berhasil dibuat' })
+    res.status(201).json({ Message: 'activity berhasil dibuat' })
   }
 )
 
 router.get(
-  '/my-activites',
+  '/my-activities',
   MainMiddleware.EnsureTokenPublic,
   async (req, res) => {
     const user = req.user
@@ -33,9 +34,46 @@ router.get(
       where: { userId: user.id },
     })
     const total = data.length
-    if (data.length == 0) {
-      return res.status(404).json({ Message: `you don't have any activities` })
-    }
     res.status(200).json({ Message: 'success', total, data })
+  }
+)
+
+router.delete(
+  '/my-activity/delete/:id',
+  MainMiddleware.EnsureTokenPublic,
+  async (req, res) => {
+    const { id } = req.params
+    const user = req.user
+    const data = await activities.findOne({
+      where: {
+        [Op.and]: [{ id }, { userId: user.id }],
+      },
+    })
+    if (!data) {
+      return res.status(404).json({ Message: 'activity not found. ' })
+    }
+    await data.destroy({ force: true })
+    res.status(200).json({ Message: 'success' })
+  }
+)
+
+router.put(
+  '/my-activity/update/:id',
+  MainMiddleware.EnsureTokenPublic,
+  async (req, res) => {
+    const { id } = req.params
+    const { activity, isImportant, activityDate } = req.body
+    const specifiedTime = dateFormater(activityDate)
+    const user = req.user
+    const data = await activities.findOne({
+      where: {
+        [Op.and]: [{ id }, { userId: user.id }],
+      },
+    })
+    if (!data) {
+      return res.status(404).json({ Message: 'activity not found. ' })
+    }
+    await data.update({ activity, isImportant, activityDate: specifiedTime })
+    res.status(200).json({ Message: 'success' })
   }
 )

@@ -21,7 +21,6 @@ router.get('/user/me', MainMiddleware.EnsureTokenPublic, async (req, res) => {
   const dbUser = req.user
   const data = await user.findOne({
     where: { id: dbUser.id },
-    include: [{ model: activities }],
   })
   res.status(200).json({ Message: 'success', data })
 })
