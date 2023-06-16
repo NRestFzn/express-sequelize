@@ -4,7 +4,7 @@ const models = require('../../database/models/')
 const jwt = require('jsonwebtoken')
 const { Op } = require('sequelize')
 const MainMiddleware = require('../../middleware/usermiddleware')
-const { user, linkedAccount } = models
+const { user } = models
 const { OAuth2Client } = require('google-auth-library')
 
 const client = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID)
@@ -12,18 +12,25 @@ const client = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID)
 routes.get('/auth/google', async (req, res) => {
   const code = req.query.code
   const register = req.query.register
-  const sync = req.query.sync
+  let redirect_uri = process.env.GOOGLE_OAUTH_LOGIN_URL
   if (register) {
-    console.log('ngakses yang register')
+    redirect_uri = process.env.GOOGLE_OAUTH_REGISTER_URL
   }
-  const googleToken = await ServiceGoogle.getGoogleOAuthTokens(register, code)
+  const googleToken = await ServiceGoogle.getGoogleOAuthTokens(
+    redirect_uri,
+    code
+  )
 
   const googleUser = await ServiceGoogle.getGoogleUser(
     googleToken.id_token,
     googleToken.access_token
   )
 
-  let data = await models.user.findOne({ where: { email: googleUser.email } })
+  let data = await models.user.findOne({
+    where: {
+      [Op.or]: [{ email: googleUser.email }, { googleId: googleUser.sub }],
+    },
+  })
 
   if (register && !data) {
     data = await models.user.create({
@@ -46,3 +53,62 @@ routes.get('/auth/google', async (req, res) => {
     token,
   })
 })
+
+routes.post(
+  '/auth/google/sync',
+  MainMiddleware.EnsureTokenPublic,
+  async (req, res) => {
+    const code = req.query.code
+    const sync = req.query.sync
+    const user = req.user
+    let redirect_uri = process.env.GOOGLE_OAUTH_LOGIN_URL
+    if (sync) {
+      redirect_uri = process.env.GOOGLE_OAUTH_SYNC_URL
+    }
+    const googleToken = await ServiceGoogle.getGoogleOAuthTokens(
+      redirect_uri,
+      code
+    )
+    const googleUser = await ServiceGoogle.getGoogleUser(
+      googleToken.id_token,
+      googleToken.access_token
+    )
+
+    if (user.googleId) {
+      return res.json({ Message: 'Akun sudah terhubung dengan google. ' })
+    }
+
+    if (googleUser.email === user.email && user.registerWith === 'google') {
+      return res.json({ Message: 'Email ini sudah  digunakan. ' })
+    }
+
+    const linkedAccount = await models.linkedAccount.findOne({
+      where: {
+        [Op.and]: [{ email: googleUser.email }, { type: 'google' }],
+      },
+    })
+
+    if (linkedAccount) {
+      return res.json({ Message: 'akun ini sudah digunakan. ' })
+    }
+
+    const updateGoogleId = await models.user.update(
+      { googleId: googleUser.sub },
+      { where: { id: user.id } }
+    )
+
+    const bindAccount = await models.linkedAccount.create({
+      userId: user.id,
+      name: googleUser.name,
+      email: googleUser.email,
+      image: googleUser.picture,
+      type: 'google',
+    })
+
+    return res.json({
+      googleUser,
+      googleToken,
+      Message: 'Menghubungkan akun berhasil. ',
+    })
+  }
+)

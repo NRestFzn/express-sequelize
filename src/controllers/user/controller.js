@@ -177,3 +177,15 @@ router.put(
     res.status(200).json({ Message: 'user berhasil di pulihkan' })
   }
 )
+
+router.get(
+  '/my-linked/accounts',
+  MainMiddleware.EnsureTokenPublic,
+  async (req, res) => {
+    const user = req.user
+    const data = await models.linkedAccount.findAll({
+      where: { userId: user.id },
+    })
+    res.status(200).json({ Message: 'success', data })
+  }
+)

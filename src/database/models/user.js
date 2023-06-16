@@ -12,6 +12,8 @@ user.init(
     image: DataTypes.STRING,
     role: DataTypes.STRING,
     registerWith: DataTypes.STRING,
+    googleId: DataTypes.STRING,
+    facebookId: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     deletedAt: DataTypes.DATE,

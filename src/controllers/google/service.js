@@ -1,17 +1,14 @@
 const axios = require('axios')
-const models = require('../../database/models')
 
 const ServiceGoogle = {
-  getGoogleOAuthTokens: async (register, code) => {
+  getGoogleOAuthTokens: async (redirect_uri, code) => {
     const token = 'https://oauth2.googleapis.com/token'
     try {
       const { data } = await axios.post(token, {
         code,
         client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
         client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-        redirect_uri: register
-          ? process.env.GOOGLE_OAUTH_REGISTER_URL
-          : process.env.GOOGLE_OAUTH_LOGIN_URL,
+        redirect_uri,
         grant_type: 'authorization_code',
       })
       return data

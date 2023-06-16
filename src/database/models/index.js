@@ -10,5 +10,6 @@ const models = {
 
 // relation
 user.hasMany(activities, { foreignKey: 'userId' })
+user.hasMany(linkedAccount, { foreignKey: 'userId' })
 
 module.exports = models
