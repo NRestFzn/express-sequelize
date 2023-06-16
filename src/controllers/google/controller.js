@@ -106,8 +106,6 @@ routes.post(
     })
 
     return res.json({
-      googleUser,
-      googleToken,
       Message: 'Menghubungkan akun berhasil. ',
     })
   }

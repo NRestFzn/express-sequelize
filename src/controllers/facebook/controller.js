@@ -99,7 +99,6 @@ routes.post(
     })
 
     return res.json({
-      facebookUser,
       Message: 'Menghubungkan akun berhasil. ',
     })
   }
