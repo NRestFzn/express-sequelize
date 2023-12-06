@@ -1,10 +1,11 @@
 {
-  "name": "nabung-yaso",
+  "name": "express-sequelize",
   "version": "1.0.0",
-  "description": "template express & nodejs for my self",
-  "main": "src/app.js",
+  "description": "express-sequelize",
+  "main": "src/main.js",
   "scripts": {
-    "start": "nodemon src/app.js",
+    "key:generate": "node ./src/scripts/GenerateJwtEnv.js",
+    "start": "nodemon src/main.js",
     "build": "yarn && npm-run-all tailwind:build start",
     "db:create": "npx sequelize-cli db:create",
     "db:drop": "npx sequelize-cli db:drop",
@@ -14,7 +15,7 @@
     "db:reset": "yarn && npm-run-all db:drop db:create db:migrate db:seed",
     "tailwind:build": "tailwindcss build -i public/assets/css/tailwind.config.css -o public/assets/css/tailwind.css"
   },
-  "author": "liz",
+  "author": "Nashir Resta",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.4.8",
@@ -22,6 +23,9 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "chalk": "^5.0.1",
+    "colorette": "^2.0.20",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",

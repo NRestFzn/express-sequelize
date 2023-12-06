@@ -6,8 +6,3 @@ router.get('/', function (req, res) {
 })
 
 module.exports = router
-
-require('../controllers/user/controller')
-require('../controllers/activity/controller')
-require('../controllers/google/controller')
-require('../controllers/facebook/controller')
