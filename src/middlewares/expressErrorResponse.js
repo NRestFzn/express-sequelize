@@ -1,13 +1,7 @@
 const _ = require('lodash')
 const multer = require('multer')
-import ResponseError from '~/core/modules/response/ResponseError'
+const ResponseError = require('../modules/response/ResponseError')
 
-/**
- *
- * @param err - Error
- * @param code - Status Code
- * @returns
- */
 function generateErrorResponse(err, code) {
   return _.isObject(err.message) ? err.message : { code, message: err.message }
 }
@@ -27,4 +21,4 @@ async function expressErrorResponse(err, _req, res, next) {
   next(err)
 }
 
-export default expressErrorResponse
+module.exports = expressErrorResponse

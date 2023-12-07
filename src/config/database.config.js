@@ -1,4 +1,4 @@
-const { env } = require('./env.config')
+const env = require('./env.config')
 
 module.exports = {
   username: env.SEQUELIZE_USERNAME,

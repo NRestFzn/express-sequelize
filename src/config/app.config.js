@@ -11,6 +11,8 @@ const db = require('../database/data-source.js')
 const indexRoutes = require('../routes/index.js')
 const { blue, red, cyan, green } = require('colorette')
 const ResponseError = require('../modules/response/ResponseError.js')
+const expressErrorResponse = require('../middlewares/expressErrorResponse.js')
+const expressErrorSequelize = require('../middlewares/expressErrorSequelize.js')
 
 class App {
   _app
@@ -87,8 +89,8 @@ class App {
 
   create() {
     // this._app.use(expressErrorZod)
-    // this._app.use(expressErrorSequelize)
-    // this._app.use(expressErrorResponse)
+    this._app.use(expressErrorSequelize)
+    this._app.use(expressErrorResponse)
 
     this._app.set('port', this._port)
     return this._app
