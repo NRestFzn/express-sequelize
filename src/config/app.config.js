@@ -4,15 +4,15 @@ const path = require('path')
 const helmet = require('helmet')
 const logger = require('morgan')
 const express = require('express')
-const env = require('./env.config.js')
+const env = require('./env.config')
 const compression = require('compression')
 const cookieParser = require('cookie-parser')
-const db = require('../database/data-source.js')
-const indexRoutes = require('../routes/index.js')
+const db = require('../database/data-source')
+const indexRoutes = require('../routes/index')
 const { blue, red, cyan, green } = require('colorette')
-const ResponseError = require('../modules/response/ResponseError.js')
-const expressErrorResponse = require('../middlewares/expressErrorResponse.js')
-const expressErrorSequelize = require('../middlewares/expressErrorSequelize.js')
+const ResponseError = require('../modules/response/ResponseError')
+const expressErrorResponse = require('../middlewares/expressErrorResponse')
+const expressErrorSequelize = require('../middlewares/expressErrorSequelize')
 
 class App {
   _app
@@ -24,6 +24,7 @@ class App {
     this._plugin()
     this._routes()
     this._database()
+    this._errorHandling()
   }
 
   /**
@@ -63,6 +64,11 @@ class App {
     })
   }
 
+  _errorHandling() {
+    this._app.use(expressErrorSequelize)
+    this._app.use(expressErrorResponse)
+  }
+
   /**
    * Initialize Database
    */
@@ -88,10 +94,6 @@ class App {
   }
 
   create() {
-    // this._app.use(expressErrorZod)
-    this._app.use(expressErrorSequelize)
-    this._app.use(expressErrorResponse)
-
     this._app.set('port', this._port)
     return this._app
   }

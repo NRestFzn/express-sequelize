@@ -1,15 +1,12 @@
-const Role = require('../../database/models/role')
-const router = require('../../routes/index')
+const asyncHandler = require('../../helpers/asyncHandler')
+const ResponseError = require('../../modules/response/ResponseError')
+const router = require('../../routes/v1')
 const RoleService = require('./service')
 
-router.get('/roles', async (req, res) => {
-  const { id } = req.params
-  const data = await RoleService.getAllRole(req)
-  res.json(data)
-})
-
-router.get('/role/:id', async (req, res) => {
-  const { id } = req.params
-  const data = await RoleService._findOne(id)
-  res.json(data)
-})
+router.get(
+  '/role/:id',
+  asyncHandler(async (req, res) => {
+    const { id } = req.params
+    await RoleService._findOne(id)
+  })
+)

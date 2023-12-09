@@ -36,13 +36,7 @@ class RoleService {
   }
 
   static async _findOne(id) {
-    const data = await Role.findOne({ where: { id } })
-
-    if (!data) {
-      throw new ResponseError.NotFound('data not found')
-    }
-
-    return data
+    throw new ResponseError.BadRequest('asd')
   }
 }
 
