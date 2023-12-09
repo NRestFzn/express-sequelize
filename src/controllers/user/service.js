@@ -65,6 +65,12 @@ class UserService {
 
     await data.update(value)
   }
+
+  static async delete(id) {
+    const data = await this.findById(id)
+
+    await data.destroy(id)
+  }
 }
 
 module.exports = UserService

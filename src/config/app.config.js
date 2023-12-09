@@ -6,9 +6,11 @@ const logger = require('morgan')
 const express = require('express')
 const env = require('./env.config')
 const compression = require('compression')
+const { optionsSwaggerUI, swaggerSpec } = require('../modules/docsSwagger')
 const cookieParser = require('cookie-parser')
 const db = require('../database/data-source')
 const indexRoutes = require('../routes/index')
+const swaggerUI = require('swagger-ui-express')
 const { blue, red, cyan, green } = require('colorette')
 const ResponseError = require('../modules/response/ResponseError')
 const ExpressErrorYup = require('../middlewares/expressErrorYup')
@@ -23,8 +25,9 @@ class App {
     this._app = express()
     this._port = env.APP_PORT
     this._plugin()
-    this._routes()
+    this._swagger()
     this._database()
+    this._routes()
     this._errorHandling()
   }
 
@@ -69,6 +72,19 @@ class App {
     this._app.use(ExpressErrorYup)
     this._app.use(expressErrorSequelize)
     this._app.use(expressErrorResponse)
+  }
+
+  _swagger() {
+    this._app.get('/v1/api-docs.json', (reqt, res) => {
+      res.setHeader('Content-Type', 'application/json')
+      res.send(swaggerSpec)
+    })
+
+    this._app.use('/v1/api-docs', swaggerUI.serve)
+    this._app.get(
+      '/v1/api-docs',
+      swaggerUI.setup(swaggerSpec, optionsSwaggerUI)
+    )
   }
 
   /**

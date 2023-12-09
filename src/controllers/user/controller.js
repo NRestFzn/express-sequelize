@@ -4,7 +4,7 @@ const asyncHandler = require('../../helpers/asyncHandler')
 const HttpResponse = require('../../modules/response/HttpResponse')
 
 router.get(
-  '/users',
+  '/user',
   asyncHandler(async (req, res) => {
     const data = await UserService.findAll(req)
 
@@ -47,6 +47,19 @@ router.put(
     await UserService.update(id, formData)
 
     const httpResponse = HttpResponse.updated()
+
+    res.status(200).json(httpResponse)
+  })
+)
+
+router.delete(
+  '/user/:id',
+  asyncHandler(async (req, res) => {
+    const { id } = req.params
+
+    await UserService.delete(id)
+
+    const httpResponse = HttpResponse.deleted()
 
     res.status(200).json(httpResponse)
   })

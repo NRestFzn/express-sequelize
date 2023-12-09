@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 const { sequelize } = require('../data-source')
+const { hashSync } = require('bcrypt')
 const Role = require('./role')
 
 class User extends Model {}
@@ -20,6 +21,9 @@ User.init(
     },
     password: {
       type: DataTypes.STRING,
+      set(value) {
+        this.setDataValue('password', hashSync(value, 7))
+      },
     },
     RoleId: {
       type: DataTypes.UUID,

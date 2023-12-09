@@ -22,14 +22,10 @@ async function ExpressErrorSequelize(err, req, res, next) {
         message: errorMessage
           ? `Validation error: ${errorMessage}`
           : err.message,
-        errors:
-          errors.reduce <
-          any >
-          ((acc, curVal) => {
-            acc[curVal.path] = curVal.message
-            return acc
-          },
-          {}),
+        errors: errors.reduce((acc, curVal) => {
+          acc[curVal.path] = curVal.message
+          return acc
+        }, {}),
       }
 
       console.log(dataError.message, dataError.errors)

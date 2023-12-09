@@ -1,4 +1,4 @@
-const env = require('../config/env.config')
+const env = require('../../config/env.config')
 const { blue, green, cyan } = require('colorette')
 
 const httpHandle = (server, port) => {

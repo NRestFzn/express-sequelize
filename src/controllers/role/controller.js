@@ -4,7 +4,7 @@ const asyncHandler = require('../../helpers/asyncHandler')
 const HttpResponse = require('../../modules/response/HttpResponse')
 
 router.get(
-  '/roles',
+  '/role',
   asyncHandler(async (req, res) => {
     const data = await RoleService.findAll(req)
 
@@ -47,6 +47,19 @@ router.put(
     await RoleService.update(id, formData)
 
     const httpResponse = HttpResponse.updated()
+
+    res.status(200).json(httpResponse)
+  })
+)
+
+router.delete(
+  '/role/:id',
+  asyncHandler(async (req, res) => {
+    const { id } = req.params
+
+    await RoleService.delete(id)
+
+    const httpResponse = HttpResponse.deleted()
 
     res.status(200).json(httpResponse)
   })
