@@ -1,11 +1,13 @@
-const Role = require('../../database/models/role')
+const roleSchema = require('./schema')
+const models = require('../../database/models/index')
 const ResponseError = require('../../modules/response/ResponseError')
 const PluginSqlizeQuery = require('../../modules/SqlizeQuery/PluginSqlizeQuery')
 
+const { Role } = models
 class RoleService {
   constructor() {}
 
-  static async getAllRole(req) {
+  static async findAll(req) {
     const { filtered } = req.query
     const rawIncludes = []
 
@@ -35,8 +37,30 @@ class RoleService {
     }
   }
 
-  static async _findOne(id) {
-    throw new ResponseError.BadRequest('asd')
+  static async findById(id) {
+    const data = await Role.findOne({ where: { id } })
+
+    if (!data) {
+      throw new ResponseError.NotFound('data not found')
+    }
+
+    return data
+  }
+
+  static async create(formData) {
+    const value = roleSchema.create.validateSync(formData)
+
+    const data = await Role.create(value)
+
+    return data
+  }
+
+  static async update(id, formData) {
+    const data = await this.findById(id)
+
+    const value = roleSchema.create.validateSync(formData)
+
+    await data.update(value)
   }
 }
 

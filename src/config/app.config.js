@@ -11,6 +11,7 @@ const db = require('../database/data-source')
 const indexRoutes = require('../routes/index')
 const { blue, red, cyan, green } = require('colorette')
 const ResponseError = require('../modules/response/ResponseError')
+const ExpressErrorYup = require('../middlewares/expressErrorYup')
 const expressErrorResponse = require('../middlewares/expressErrorResponse')
 const expressErrorSequelize = require('../middlewares/expressErrorSequelize')
 
@@ -65,6 +66,7 @@ class App {
   }
 
   _errorHandling() {
+    this._app.use(ExpressErrorYup)
     this._app.use(expressErrorSequelize)
     this._app.use(expressErrorResponse)
   }
