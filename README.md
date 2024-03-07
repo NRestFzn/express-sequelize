@@ -92,7 +92,7 @@ npm run tailwind:build
 ```
 
 **##Gak penting**
-**_##Necessary_**
+**_##UnNecessary_**
 
 ```sh
 If you have any suggestion or wanna ask something, don't hesitate to ask.
