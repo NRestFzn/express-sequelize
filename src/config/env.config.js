@@ -63,6 +63,24 @@ const baseURLEnv = {
 }
 
 /**
+ * Google OAUTH Env
+ */
+const googleOAuthEnv = {
+  GOOGLE_OAUTH_CLIENT_ID: getEnv('GOOGLE_OAUTH_CLIENT_ID', ''),
+  GOOGLE_OAUTH_CLIENT_SECRET: getEnv('GOOGLE_OAUTH_CLIENT_SECRET', ''),
+  GOOGLE_OAUTH_LOGIN_URL: getEnv('GOOGLE_OAUTH_LOGIN_URL', ''),
+  GOOGLE_OAUTH_REGISTER_URL: getEnv('GOOGLE_OAUTH_REGISTER_URL', ''),
+}
+
+/**
+ * Facebook Auth Env
+ */
+const facebookAuthEnv = {
+  FACEBOOK_APP_ID: getEnv('FACEBOOK_APP_ID', ''),
+  FACEBOOK_APP_SECRET: getEnv('FACEBOOK_APP_SECRET', ''),
+}
+
+/**
  * Database Env
  */
 const databaseEnv = {
@@ -82,4 +100,6 @@ module.exports = {
   ...secretEnv,
   ...databaseEnv,
   ...baseURLEnv,
+  ...googleOAuthEnv,
+  ...facebookAuthEnv,
 }
