@@ -6,6 +6,11 @@ module.exports = {
       tags: ['Role'],
       summary: 'Get All Role',
       produces: ['application/json'],
+      security: [
+        {
+          auth_token: [],
+        },
+      ],
       parameters: [
         {
           $ref: '#/components/parameters/page',
@@ -27,10 +32,13 @@ module.exports = {
       },
     },
     post: {
-      //   security: [{ Bearer: [] }],
       tags: ['Role'],
       summary: 'Create New Role',
-      parameters: [],
+      security: [
+        {
+          auth_token: [],
+        },
+      ],
       requestBody: {
         required: true,
         content: {
@@ -52,6 +60,11 @@ module.exports = {
       tags: ['Role'],
       summary: 'Get Role By Id',
       produces: ['application/json'],
+      security: [
+        {
+          auth_token: [],
+        },
+      ],
       parameters: [
         {
           in: 'path',
@@ -73,6 +86,11 @@ module.exports = {
       tags: ['Role'],
       summary: 'Update Role By Id',
       produces: ['application/json'],
+      security: [
+        {
+          auth_token: [],
+        },
+      ],
       parameters: [
         {
           in: 'path',
@@ -99,9 +117,13 @@ module.exports = {
       },
     },
     delete: {
-      //   security: [{ Bearer: [] }],
       tags: ['Role'],
       summary: 'Delete Data Role',
+      security: [
+        {
+          auth_token: [],
+        },
+      ],
       parameters: [
         {
           in: 'path',

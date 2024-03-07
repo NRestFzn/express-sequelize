@@ -18,6 +18,9 @@ User.init(
     },
     email: {
       type: DataTypes.STRING,
+      unique: {
+        msg: 'Email is already used',
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -27,12 +30,6 @@ User.init(
     },
     RoleId: {
       type: DataTypes.UUID,
-      references: {
-        model: 'Roles',
-        key: 'id',
-      },
-      onUpdate: 'cascade',
-      onDelete: 'cascade',
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -41,8 +38,15 @@ User.init(
       type: DataTypes.DATE,
     },
   },
-  { sequelize }
+  {
+    defaultScope: {
+      attributes: { exclude: ['password'] },
+    },
+    sequelize,
+  }
 )
+
+User.addScope('withPassword', { attributes: {} })
 
 User.belongsTo(Role, { foreignKey: 'RoleId' })
 

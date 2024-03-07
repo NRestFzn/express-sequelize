@@ -19,9 +19,7 @@ async function ExpressErrorSequelize(err, req, res, next) {
       const errorMessage = get(errors, '0.message', null)
 
       const dataError = {
-        message: errorMessage
-          ? `Validation error: ${errorMessage}`
-          : err.message,
+        message: errorMessage ? `${errorMessage}` : err.message,
         errors: errors.reduce((acc, curVal) => {
           acc[curVal.path] = curVal.message
           return acc

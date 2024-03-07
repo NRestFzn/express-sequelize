@@ -1,10 +1,15 @@
 const RoleService = require('./service')
 const router = require('../../routes/v1')
 const asyncHandler = require('../../helpers/asyncHandler')
+const authorization = require('../../middlewares/authorization')
 const HttpResponse = require('../../modules/response/HttpResponse')
+const permissions = require('../../middlewares/permission')
+const RoleId = require('../../constants/ConstRole')
 
 router.get(
   '/role',
+  authorization,
+  permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const data = await RoleService.findAll(req)
 

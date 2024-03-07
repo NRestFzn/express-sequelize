@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const userSchema = require('./schema')
 const models = require('../../database/models/index')
 const ResponseError = require('../../modules/response/ResponseError')
@@ -38,7 +39,7 @@ class UserService {
   }
 
   static async findById(id) {
-    const data = await User.findOne({
+    const data = await User.scope('withPassword').findOne({
       where: { id },
       include: [{ model: Role }],
     })
@@ -61,7 +62,7 @@ class UserService {
   static async update(id, formData) {
     const data = await this.findById(id)
 
-    const value = userSchema.create.validateSync(formData)
+    const value = userSchema.update.validateSync(formData)
 
     await data.update(value)
   }
@@ -70,6 +71,26 @@ class UserService {
     const data = await this.findById(id)
 
     await data.destroy(id)
+  }
+
+  static async changePassword(id, formData) {
+    const data = await this.findById(id)
+
+    const value = userSchema.changePassword.validateSync(formData)
+
+    const compareOldPassword = await bcrypt.compareSync(
+      value.oldPassword,
+      data.password
+    )
+
+    if (!compareOldPassword)
+      throw new ResponseError.BadRequest('Incorrect old password')
+
+    await data.update({
+      ...data,
+      ...value,
+      password: value.confirmNewPassword,
+    })
   }
 }
 
