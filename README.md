@@ -1,5 +1,5 @@
 ##Cara Pemakaian
-##How to use it 
+##How to use
 
 ID - clone dengan `https` / `ssh` / `github cli`
 
@@ -9,17 +9,18 @@ EN - clone with `https` / `ssh` / `github cli`
 git clone https://github.com/justRizu/daily-activity.git
 ```
 
-ID - Kalau sudah di clone buat file dengan nama .env,
-lalu copy semua yang ada di .env.example, paste di .env lalu isi sesuai kebutuhan.
+ID - Jika sudah di clone, buat file .env lalu copy semua yang ada di file
+.env.example lalu paste di file .env nya.
 
 EN - After you clone this repository make sure you make .env file,
-then copy everything from .env.example file, paste it to .env file.file
+then copy everything from .env.example file and paste it to .env file.
 
-##Install
+##Install required dependencies
 
-ID - buka terminal dan jalankan script berikut
+ID - Sebelum melakukan menjalankan aplikasi, pastikan jalankan script ini
+di terminal terlebih dahulu
 
-EN - open terminal and run this script 
+EN - Before using the app, run this script first on your terminal
 
 ```sh
 npm install
@@ -29,7 +30,8 @@ or
 yarn
 ```
 
-##Run app
+##Jalankan aplikasi nya menggunakan script ini
+##Run the app using this script
 
 ```sh
 npm run start
@@ -39,27 +41,35 @@ or
 yarn start
 ```
 
+##Penting
 ##Necessary
 
 ```sh
-http://localhost:8000/v1/api-docs <- swagger docs 
-npm run db:create <- buat database / make database
-npm run db:migrate <- migrasi ke database / migrating to database
-npm run db:drop <- hapus database / drop database
-npm run db:migrate:refresh <- migrasi ulang ke database jika ada perubahan / re-migrate if there's a change
-npm run db:reset <- melakuan 4 perintah diatas sekaligus / run all 4 scripts above 
-npm run tailwind:build <- melakukan build pada css yang berbentuk tailwind / build for tailwind css
+- App Swagger Docs :
+http://localhost:8000/v1/api-docs
+
+- buat database | create database :
+npm run db:create
+
+- migrasi file migrations ke database | migrating migrations file to database :
+npm run db:migrate
+
+- hapus database | drop database :
+npm run db:drop
+
+- migrasi ulang ke database jika ada perubahan pada file migration | re-migrate if there's a change on the migration file :
+npm run db:migrate:refresh
+
+- melakuan 4 perintah diatas sekaligus | run all the 4 scripts above :
+npm run db:reset
+
+- melakukan build pada css yang berbentuk tailwind / build for tailwind css :
+npm run tailwind:build
 ```
 
-##Work in progress
-
 ```sh
-Crud for activity and more features
-```
+If you have any suggestion or wanna ask something, don't hesitate to ask.
+Contact me : nashirresta7@gmail.com
 
-##Note
-
-```sh
-ID - masih dalam pengembangan
-EN - Still got an update till now
+thank you~~ :)
 ```
