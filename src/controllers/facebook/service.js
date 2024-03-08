@@ -1,5 +1,5 @@
-const axios = require('axios')
-const env = require('../../config/env.config')
+import axios from 'axios'
+import env from '../../config/env.config'
 
 const ServiceFacebook = {
   getFacebookOAuthAccess: async () => {
@@ -11,9 +11,7 @@ const ServiceFacebook = {
     }
 
     const valuesToString = Object.keys(values)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`
-      )
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
       .join('&')
 
     try {
@@ -31,9 +29,7 @@ const ServiceFacebook = {
     }
 
     const valuesToString = Object.keys(values)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`
-      )
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
       .join('&')
 
     try {
@@ -51,9 +47,7 @@ const ServiceFacebook = {
     }
 
     const valuesToString = Object.keys(values)
-      .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`
-      )
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(values[key])}`)
       .join('&')
 
     try {

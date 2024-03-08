@@ -1,12 +1,12 @@
-const authSchema = require('./schema')
-const { compareSync } = require('bcrypt')
-const models = require('../../database/models')
-const ResponseError = require('../../modules/response/ResponseError')
-const jwt = require('jsonwebtoken')
-const env = require('../../config/env.config')
-const { User } = models
-const db = require('../../database/data-source')
+import jwt from 'jsonwebtoken'
+import authSchema from './schema'
+import env from 'config/env.config'
+import models from 'database/models'
+import { compareSync } from 'bcrypt'
+import db from 'database/data-source'
+import ResponseError from 'modules/response/ResponseError'
 
+const { User } = models
 class AuthService {
   constructor() {}
   static async login(formData) {
@@ -18,8 +18,7 @@ class AuthService {
 
     const matchPassword = compareSync(value.password, user.password)
 
-    if (!matchPassword)
-      throw new ResponseError.Unauthorized('Incorrect email or password')
+    if (!matchPassword) throw new ResponseError.Unauthorized('Incorrect email or password')
 
     const token = jwt.sign(user.dataValues, env.JWT_SECRET_ACCESS_TOKEN, {
       expiresIn: env.JWT_ACCESS_TOKEN_EXPIRED,

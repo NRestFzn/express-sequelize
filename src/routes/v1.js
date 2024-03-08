@@ -1,7 +1,8 @@
-const express = require('express')
+import path from 'path'
+import express from 'express'
+import getRoutes from '../helpers/routing'
+
 const router = express.Router()
-const getRoutes = require('../helpers/routing')
-const path = require('path')
 
 const baseRoutes = path.resolve(`${__dirname}/../controllers`)
 

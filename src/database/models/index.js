@@ -1,5 +1,5 @@
-const Role = require('./role')
-const User = require('./user')
+import Role from './role'
+import User from './user'
 
 const models = {
   Role,

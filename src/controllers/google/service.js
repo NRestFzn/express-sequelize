@@ -1,5 +1,5 @@
-const axios = require('axios')
-const env = require('../../config/env.config')
+import axios from 'axios'
+import env from '../../config/env.config'
 
 const ServiceGoogle = {
   getGoogleOAuthTokens: async (redirect_uri, code) => {
@@ -19,14 +19,11 @@ const ServiceGoogle = {
   },
   getGoogleUser: async (id_token, access_token) => {
     try {
-      const { data } = await axios.get(
-        `https://www.googleapis.com/oauth2/v3/userinfo?alt=json&access_token=${access_token}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id_token}`,
-          },
-        }
-      )
+      const { data } = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?alt=json&access_token=${access_token}`, {
+        headers: {
+          Authorization: `Bearer ${id_token}`,
+        },
+      })
       return data
     } catch (error) {
       return error.message

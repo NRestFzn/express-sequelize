@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken')
-const models = require('../database/models/index')
-const env = require('../config/env.config')
+import jwt from 'jsonwebtoken'
+import models from 'database/models/index'
+import env from 'config/env.config'
 
 const { User } = models
 

@@ -1,4 +1,4 @@
-const { ValidationError } = require('yup')
+import { ValidationError } from 'yup'
 
 async function ExpressErrorYup(err, req, res, next) {
   if (err instanceof ValidationError) {

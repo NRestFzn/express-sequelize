@@ -1,11 +1,11 @@
-const UserService = require('./service')
-const router = require('../../routes/v1')
-const RoleId = require('../../constants/ConstRole')
-const asyncHandler = require('../../helpers/asyncHandler')
-const permissions = require('../../middlewares/permission')
-const authorization = require('../../middlewares/authorization')
-const HttpResponse = require('../../modules/response/HttpResponse')
-const userSchema = require('./schema')
+import router from 'routes/v1'
+import userSchema from './schema'
+import UserService from './service'
+import RoleId from 'constants/ConstRole'
+import asyncHandler from 'helpers/asyncHandler'
+import permissions from 'middlewares/permission'
+import authorization from 'middlewares/authorization'
+import HttpResponse from 'modules/response/HttpResponse'
 
 router.get(
   '/user',

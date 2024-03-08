@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize')
-const { sequelize } = require('../data-source')
-const { hashSync } = require('bcrypt')
+import { Model, DataTypes } from 'sequelize'
+import { sequelize } from '../data-source'
+import { hashSync } from 'bcrypt'
 const Role = require('./role')
 
 class User extends Model {}

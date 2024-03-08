@@ -1,21 +1,23 @@
-const ejs = require('ejs')
-const cors = require('cors')
-const path = require('path')
-const helmet = require('helmet')
-const logger = require('morgan')
-const express = require('express')
-const env = require('./env.config')
-const compression = require('compression')
-const { optionsSwaggerUI, swaggerSpec } = require('../modules/docsSwagger')
-const cookieParser = require('cookie-parser')
-const db = require('../database/data-source')
-const indexRoutes = require('../routes/index')
-const swaggerUI = require('swagger-ui-express')
-const { blue, red, cyan, green } = require('colorette')
-const ResponseError = require('../modules/response/ResponseError')
-const ExpressErrorYup = require('../middlewares/expressErrorYup')
-const expressErrorResponse = require('../middlewares/expressErrorResponse')
-const expressErrorSequelize = require('../middlewares/expressErrorSequelize')
+import ejs from 'ejs'
+import cors from 'cors'
+import path from 'path'
+import helmet from 'helmet'
+import logger from 'morgan'
+import express from 'express'
+import env from './env.config'
+import compression from 'compression'
+import cookieParser from 'cookie-parser'
+import db from '../database/data-source'
+import indexRoutes from '../routes/index'
+import swaggerUI from 'swagger-ui-express'
+import { blue, red, cyan, green } from 'colorette'
+import ExpressErrorYup from '../middlewares/expressErrorYup'
+import ResponseError from '../modules/response/ResponseError'
+import expressErrorResponse from '../middlewares/expressErrorResponse'
+import { optionsSwaggerUI, swaggerSpec } from '../modules/docsSwagger'
+import expressErrorSequelize from '../middlewares/expressErrorSequelize'
+
+require('@babel/register')({ extensions: ['.js', '.ts'] })
 
 class App {
   _app
@@ -62,9 +64,7 @@ class App {
 
       const endpoint = `${host}${url}`
 
-      throw new ResponseError.NotFound(
-        `Sorry, the ${endpoint} HTTP method ${method} resource you are looking for was not found.`
-      )
+      throw new ResponseError.NotFound(`Sorry, the ${endpoint} HTTP method ${method} resource you are looking for was not found.`)
     })
   }
 
@@ -81,10 +81,7 @@ class App {
     })
 
     this._app.use('/v1/api-docs', swaggerUI.serve)
-    this._app.get(
-      '/v1/api-docs',
-      swaggerUI.setup(swaggerSpec, optionsSwaggerUI)
-    )
+    this._app.get('/v1/api-docs', swaggerUI.setup(swaggerSpec, optionsSwaggerUI))
   }
 
   /**

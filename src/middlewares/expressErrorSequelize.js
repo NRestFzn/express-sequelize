@@ -1,5 +1,5 @@
-const { EmptyResultError, BaseError, ValidationError } = require('sequelize')
-const { get } = require('lodash')
+import { EmptyResultError, BaseError, ValidationError } from 'sequelize'
+import { get } from 'lodash'
 
 function msg(message) {
   return `Sequelize Error: ${message}`

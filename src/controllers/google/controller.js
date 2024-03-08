@@ -1,12 +1,12 @@
-const routes = require('../../routes/v1')
-const ServiceGoogle = require('./service')
-const models = require('../../database/models/index')
-const jwt = require('jsonwebtoken')
-const env = require('../../config/env.config')
-const db = require('../../database/data-source')
-const RoleId = require('../../constants/ConstRole')
-const asyncHandler = require('../../helpers/asyncHandler')
-const ResponseError = require('../../modules/response/ResponseError')
+import routes from 'routes/v1'
+import jwt from 'jsonwebtoken'
+import env from 'config/env.config'
+import ServiceGoogle from './service'
+import db from 'database/data-source'
+import RoleId from 'constants/ConstRole'
+import models from 'database/models/index'
+import asyncHandler from 'helpers/asyncHandler'
+import ResponseError from 'modules/response/ResponseError'
 
 routes.get(
   '/auth/google',

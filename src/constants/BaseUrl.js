@@ -1,4 +1,4 @@
-const env = require('../config/env.config')
+import env from 'config/env.config'
 
 const URL_CLIENT = {
   development: 'http://localhost:1501',

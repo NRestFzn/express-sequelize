@@ -1,10 +1,6 @@
 class HttpResponse {
   static baseResponse(dataResponse) {
-    const {
-      message = 'data has been received',
-      code = 200,
-      ...rest
-    } = dataResponse
+    const { message = 'data has been received', code = 200, ...rest } = dataResponse
 
     return { code, message, ...rest }
   }
@@ -16,7 +12,7 @@ class HttpResponse {
   }
 
   static created(dataResponse, options) {
-    const message = 'data successfully added'
+    const message = 'data successfully created'
 
     return this.baseResponse({ code: 201, message, ...dataResponse })
   }

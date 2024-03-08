@@ -1,0 +1,25 @@
+{
+  "presets": [["@babel/preset-env"], "@babel/preset-typescript"],
+  "plugins": [
+    ["@babel/transform-runtime"],
+    "@babel/proposal-object-rest-spread",
+    "@babel/proposal-class-properties",
+    [
+      "module-resolver",
+      {
+        "root": ["./src/"],
+        "alias": {
+          "config": "./src/config",
+          "constants": "./src/constants",
+          "controllers": "./src/controllers",
+          "database": "./src/database",
+          "models": "./src/database/models",
+          "helpers": "./src/helpers",
+          "middlewares": "./src/middlewares",
+          "modules": "./src/modules",
+          "routes": "./src/routes"
+        }
+      }
+    ]
+  ]
+}

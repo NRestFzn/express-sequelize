@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize')
-const { sequelize } = require('../data-source')
+import { Model, DataTypes } from 'sequelize'
+import { sequelize } from '../data-source'
 
 class Role extends Model {}
 

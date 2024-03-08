@@ -1,6 +1,6 @@
-const _ = require('lodash')
-const multer = require('multer')
-const ResponseError = require('../modules/response/ResponseError')
+import _ from 'lodash'
+import multer from 'multer'
+const ResponseError = require('modules/response/ResponseError')
 
 function generateErrorResponse(err, code) {
   return _.isObject(err.message) ? err.message : { code, message: err.message }

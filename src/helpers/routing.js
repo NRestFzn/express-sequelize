@@ -1,6 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const { cyan } = require('colorette')
+import fs from 'fs'
+import path from 'path'
+import { cyan } from 'colorette'
 
 var filename = path.basename(__filename)
 const ext = `.${filename.split('.').pop()}`

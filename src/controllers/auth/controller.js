@@ -1,7 +1,8 @@
-const AuthService = require('./service')
-const router = require('../../routes/v1')
-const asyncHandler = require('../../helpers/asyncHandler')
-const RoleId = require('../../constants/ConstRole')
+import router from 'routes/v1'
+import AuthService from './service'
+import RoleId from 'constants/ConstRole'
+import asyncHandler from 'helpers/asyncHandler'
+import HttpResponse from 'modules/response/HttpResponse'
 
 router.post(
   '/login',
@@ -24,6 +25,8 @@ router.post(
       RoleId: RoleId.USER,
     })
 
-    res.status(200).json(data)
+    const httpResponse = HttpResponse.created({ data })
+
+    res.status(200).json(httpResponse)
   })
 )

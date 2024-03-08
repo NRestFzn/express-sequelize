@@ -1,12 +1,12 @@
-const jwt = require('jsonwebtoken')
-const routes = require('../../routes/v1')
-const ServiceFacebook = require('./service')
-const env = require('../../config/env.config')
-const db = require('../../database/data-source')
-const RoleId = require('../../constants/ConstRole')
-const models = require('../../database/models/index')
-const asyncHandler = require('../../helpers/asyncHandler')
-const ResponseError = require('../../modules/response/ResponseError')
+import jwt from 'jsonwebtoken'
+import routes from 'routes/v1'
+import env from 'config/env.config'
+import db from 'database/data-source'
+import ServiceFacebook from './service'
+import RoleId from 'constants/ConstRole'
+import models from 'database/models/index'
+import asyncHandler from 'helpers/asyncHandler'
+import ResponseError from 'modules/response/ResponseError'
 
 routes.get(
   '/auth/facebook',

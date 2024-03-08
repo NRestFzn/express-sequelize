@@ -1,4 +1,4 @@
-const yup = require('yup')
+import * as yup from 'yup'
 
 const create = yup.object().shape({
   name: yup.string().required('Name is required'),

@@ -1,9 +1,9 @@
-const fs = require('fs')
-const _ = require('lodash')
-const path = require('path')
-const swaggerJSDoc = require('swagger-jsdoc')
-const env = require('../config/env.config')
-const { BASE_URL_SERVER } = require('../constants/BaseUrl')
+import fs from 'fs'
+import _ from 'lodash'
+import path from 'path'
+import swaggerJSDoc from 'swagger-jsdoc'
+const env = require('config/env.config')
+const { BASE_URL_SERVER } = require('constants/BaseUrl')
 
 const baseRouteDocs = path.resolve(`${__dirname}/../docs/routes`)
 const baseSchemaDocs = path.resolve(`${__dirname}/../docs/schemas`)
@@ -55,8 +55,7 @@ const swaggerOptions = {
           type: 'apiKey',
           in: 'header',
           name: 'Authorization',
-          description:
-            'JWT Authorization header using the JWT scheme. Example: “Authorization: JWT {token}”',
+          description: 'JWT Authorization header using the JWT scheme. Example: “Authorization: JWT {token}”',
         },
       },
       schemas: docsSchemas,
@@ -94,8 +93,8 @@ const swaggerOptions = {
   apis: [],
 }
 
-const swaggerSpec = swaggerJSDoc(swaggerOptions)
-const optionsSwaggerUI = {
+export const swaggerSpec = swaggerJSDoc(swaggerOptions)
+export const optionsSwaggerUI = {
   explorer: true,
   swaggerOptions: { urls: swaggerOptURL },
 }

@@ -1,10 +1,10 @@
-const RoleService = require('./service')
-const router = require('../../routes/v1')
-const asyncHandler = require('../../helpers/asyncHandler')
-const authorization = require('../../middlewares/authorization')
-const HttpResponse = require('../../modules/response/HttpResponse')
-const permissions = require('../../middlewares/permission')
-const RoleId = require('../../constants/ConstRole')
+import router from 'routes/v1'
+import RoleService from './service'
+import RoleId from 'constants/ConstRole'
+import asyncHandler from 'helpers/asyncHandler'
+import permissions from 'middlewares/permission'
+import authorization from 'middlewares/authorization'
+import HttpResponse from 'modules/response/HttpResponse'
 
 router.get(
   '/role',
