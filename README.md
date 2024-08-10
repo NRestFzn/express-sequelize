@@ -6,7 +6,7 @@ ID - clone dengan `https` / `ssh` / `github cli`
 _EN - clone with `https` / `ssh` / `github cli`_
 
 ```sh
-git clone https://github.com/justRizu/daily-activity.git
+git clone https://github.com/NRestFzn/express-sequelize.git
 ```
 
 ID - Jika sudah di clone, buat file .env lalu copy semua yang ada di file .env.example lalu paste di file .env nya.
