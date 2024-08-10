@@ -15,7 +15,7 @@ routes.get(
 
     const register = req.query.register
 
-    const trx = await db.sequelize.transaction()
+    const txn = await db.sequelize.transaction()
 
     let redirect_uri = env.GOOGLE_OAUTH_LOGIN_URL
 
@@ -46,7 +46,7 @@ routes.get(
           RoleId: RoleId.USER,
           // avatar: googleUser.picture,
         },
-        { transaction: trx }
+        { transaction: txn }
       )
     }
 
@@ -58,7 +58,7 @@ routes.get(
       expiresIn: env.JWT_ACCESS_TOKEN_EXPIRED,
     })
 
-    await trx.commit()
+    await txn.commit()
 
     res.json({
       message: 'success',

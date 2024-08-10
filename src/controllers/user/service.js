@@ -51,29 +51,29 @@ class UserService {
     return data
   }
 
-  static async create(formData) {
+  static async create(formData, transaction) {
     const value = userSchema.create.validateSync(formData)
 
-    const data = await User.create(value)
+    const data = await User.create(value, { transaction })
 
     return data
   }
 
-  static async update(id, formData) {
+  static async update(id, formData, transaction) {
     const data = await this.findById(id)
 
     const value = userSchema.update.validateSync(formData)
 
-    await data.update(value)
+    await data.update(value, { transaction })
   }
 
-  static async delete(id) {
+  static async delete(id, transaction) {
     const data = await this.findById(id)
 
-    await data.destroy(id)
+    await data.destroy(id, transaction)
   }
 
-  static async changePassword(id, formData) {
+  static async changePassword(id, formData, transaction) {
     const data = await this.findById(id)
 
     const value = userSchema.changePassword.validateSync(formData)
@@ -86,11 +86,14 @@ class UserService {
     if (!compareOldPassword)
       throw new ResponseError.BadRequest('Incorrect old password')
 
-    await data.update({
-      ...data,
-      ...value,
-      password: value.confirmNewPassword,
-    })
+    await data.update(
+      {
+        ...data,
+        ...value,
+        password: value.confirmNewPassword,
+      },
+      { transaction }
+    )
   }
 }
 

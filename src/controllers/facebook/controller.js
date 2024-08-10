@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import routes from '@routes/v1'
 import env from '@config/env.config'
-import db from '@database/data-source'
 import ServiceFacebook from './service'
 import RoleId from '@constants/ConstRole'
 import models from '@database/models/index'
@@ -13,7 +12,7 @@ routes.get(
   asyncHandler(async (req, res, next) => {
     const { access_token, register } = req.query
 
-    const trx = await db.sequelize.transaction()
+    const txn = await req.transaction
 
     const appAccessToken = await ServiceFacebook.getFacebookOAuthAccess()
 
@@ -42,7 +41,7 @@ routes.get(
           password: env.JWT_SECRET_ACCESS_TOKEN,
           // avatar: facebookUser.picture.data.url,
         },
-        { transaction: trx }
+        { transaction: txn }
       )
     }
 
@@ -54,7 +53,7 @@ routes.get(
       expiresIn: env.JWT_ACCESS_TOKEN_EXPIRED,
     })
 
-    await trx.commit()
+    await txn.commit()
 
     res.json({
       message: 'success',

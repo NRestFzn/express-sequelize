@@ -20,10 +20,15 @@ router.post(
   asyncHandler(async function register(req, res) {
     const formData = req.body
 
-    const data = await AuthService.register({
-      ...formData,
-      RoleId: RoleId.USER,
-    })
+    const txn = await req.transaction
+
+    const data = await AuthService.register(
+      {
+        ...formData,
+        RoleId: RoleId.USER,
+      },
+      txn
+    )
 
     const httpResponse = HttpResponse.created({ data })
 

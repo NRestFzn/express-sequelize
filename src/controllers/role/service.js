@@ -47,26 +47,26 @@ class RoleService {
     return data
   }
 
-  static async create(formData) {
+  static async create(formData, transaction) {
     const value = roleSchema.create.validateSync(formData)
 
-    const data = await Role.create(value)
+    const data = await Role.create(value, { transaction })
 
     return data
   }
 
-  static async update(id, formData) {
+  static async update(id, formData, transaction) {
     const data = await this.findById(id)
 
     const value = roleSchema.create.validateSync(formData)
 
-    await data.update(value)
+    await data.update(value, { transaction })
   }
 
-  static async delete(id) {
+  static async delete(id, transaction) {
     const data = await this.findById(id)
 
-    await data.destroy(id)
+    await data.destroy(id, { transaction })
   }
 }
 

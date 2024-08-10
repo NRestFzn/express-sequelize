@@ -39,7 +39,10 @@ router.post(
   permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const formData = req.body
-    const data = await RoleService.create(formData)
+
+    const txn = await req.transaction
+
+    const data = await RoleService.create(formData, txn)
 
     const httpResponse = HttpResponse.created({ data })
 
@@ -53,9 +56,12 @@ router.put(
   permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const { id } = req.params
+
+    const txn = await req.transaction
+
     const formData = req.body
 
-    await RoleService.update(id, formData)
+    await RoleService.update(id, formData, txn)
 
     const httpResponse = HttpResponse.updated()
 
@@ -70,7 +76,9 @@ router.delete(
   asyncHandler(async (req, res) => {
     const { id } = req.params
 
-    await RoleService.delete(id)
+    const txn = await req.transaction
+
+    await RoleService.delete(id, txn)
 
     const httpResponse = HttpResponse.deleted()
 

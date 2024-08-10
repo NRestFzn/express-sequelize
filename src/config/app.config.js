@@ -16,6 +16,7 @@ import ResponseError from '@modules/response/ResponseError'
 import expressErrorResponse from '@middlewares/expressErrorResponse'
 import { optionsSwaggerUI, swaggerSpec } from '@modules/docsSwagger'
 import expressErrorSequelize from '@middlewares/expressErrorSequelize'
+import expressAutoHandlerTransaction from '@middlewares/expressAutoHandlerTransaction'
 
 require('@babel/register')({ extensions: ['.js', '.ts'] })
 
@@ -54,7 +55,7 @@ class App {
    * Initialize Routes
    */
   _routes() {
-    this._app.use(indexRoutes)
+    this._app.use(expressAutoHandlerTransaction, indexRoutes)
 
     // Catch error 404 endpoint not found
     this._app.use('*', function (req, _res) {

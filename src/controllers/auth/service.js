@@ -33,14 +33,12 @@ class AuthService {
     }
   }
 
-  static async register(formData) {
+  static async register(formData, transaction) {
     const value = authSchema.register.validateSync(formData)
 
-    const trx = await db.sequelize.transaction()
+    const data = await User.create({ ...value }, { transaction })
 
-    const data = await User.create({ ...value }, { transaction: trx })
-
-    await trx.commit()
+    await transaction.commit()
 
     return data
   }
