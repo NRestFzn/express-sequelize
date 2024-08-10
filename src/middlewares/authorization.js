@@ -45,13 +45,13 @@ async function authorization(req, res, next) {
 }
 
 function isPasswordChanged(decoded, dbUser) {
-  let reqUser = decoded.user
-  if (reqUser && dbUser) {
+  if (decoded && dbUser) {
     let curUser = dbUser.dataValues
-    if (reqUser.password !== curUser.password) {
+    if (decoded.password !== curUser.password) {
       return true
     }
   }
+  return false
 }
 
 module.exports = authorization

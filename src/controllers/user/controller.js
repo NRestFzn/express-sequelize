@@ -108,7 +108,7 @@ router.get(
 )
 
 router.put(
-  '/user/me/update',
+  '/user-me/update',
   authorization,
   asyncHandler(async (req, res) => {
     const user = req.user
@@ -134,7 +134,7 @@ router.put(
 )
 
 router.put(
-  '/user/me/change-password',
+  '/user-me/change-password',
   authorization,
   asyncHandler(async (req, res) => {
     const user = req.user

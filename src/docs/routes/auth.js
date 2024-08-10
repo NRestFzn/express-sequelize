@@ -1,7 +1,7 @@
 const schema = require('../schemas/auth')
 
 module.exports = {
-  '/login': {
+  '/auth/login': {
     post: {
       tags: ['Auth'],
       summary: 'Login to your account',
@@ -22,7 +22,7 @@ module.exports = {
     },
   },
 
-  '/register': {
+  '/auth/register': {
     post: {
       tags: ['Auth'],
       summary: 'Create new account',

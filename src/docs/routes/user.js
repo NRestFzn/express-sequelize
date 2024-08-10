@@ -214,7 +214,7 @@ module.exports = {
     },
   },
 
-  '/user/me/update': {
+  '/user-me/update': {
     put: {
       tags: ['User'],
       summary: 'Update My Data',
@@ -241,7 +241,7 @@ module.exports = {
     },
   },
 
-  '/user/me/change-password': {
+  '/user-me/change-password': {
     put: {
       tags: ['User'],
       summary: 'Change My Password',

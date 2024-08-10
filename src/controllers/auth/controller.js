@@ -5,7 +5,7 @@ import asyncHandler from '@helpers/asyncHandler'
 import HttpResponse from '@modules/response/HttpResponse'
 
 router.post(
-  '/login',
+  '/auth/login',
   asyncHandler(async function login(req, res) {
     const formData = req.body
 
@@ -16,7 +16,7 @@ router.post(
 )
 
 router.post(
-  '/register',
+  '/auth/register',
   asyncHandler(async function register(req, res) {
     const formData = req.body
 

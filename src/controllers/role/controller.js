@@ -21,6 +21,8 @@ router.get(
 
 router.get(
   '/role/:id',
+  authorization,
+  permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const { id } = req.params
     const data = await RoleService.findById(id)
@@ -33,6 +35,8 @@ router.get(
 
 router.post(
   '/role',
+  authorization,
+  permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const formData = req.body
     const data = await RoleService.create(formData)
@@ -45,6 +49,8 @@ router.post(
 
 router.put(
   '/role/:id',
+  authorization,
+  permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const { id } = req.params
     const formData = req.body
@@ -59,6 +65,8 @@ router.put(
 
 router.delete(
   '/role/:id',
+  authorization,
+  permissions([RoleId.ADMIN]),
   asyncHandler(async (req, res) => {
     const { id } = req.params
 
