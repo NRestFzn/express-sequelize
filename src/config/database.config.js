@@ -1,4 +1,4 @@
-import env from 'config/env.config'
+import env from '@config/env.config'
 
 module.exports = {
   username: env.SEQUELIZE_USERNAME,

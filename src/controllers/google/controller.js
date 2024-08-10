@@ -1,12 +1,12 @@
 import routes from 'routes/v1'
 import jwt from 'jsonwebtoken'
-import env from 'config/env.config'
+import env from '@config/env.config'
 import ServiceGoogle from './service'
-import db from 'database/data-source'
-import RoleId from 'constants/ConstRole'
-import models from 'database/models/index'
-import asyncHandler from 'helpers/asyncHandler'
-import ResponseError from 'modules/response/ResponseError'
+import db from '@database/data-source'
+import RoleId from '@constants/ConstRole'
+import models from '@database/models/index'
+import asyncHandler from '@helpers/asyncHandler'
+import ResponseError from '@modules/response/ResponseError'
 
 routes.get(
   '/auth/google',

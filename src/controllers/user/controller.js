@@ -1,11 +1,11 @@
-import router from 'routes/v1'
+import router from '@routes/v1'
 import userSchema from './schema'
 import UserService from './service'
-import RoleId from 'constants/ConstRole'
-import asyncHandler from 'helpers/asyncHandler'
-import permissions from 'middlewares/permission'
-import authorization from 'middlewares/authorization'
-import HttpResponse from 'modules/response/HttpResponse'
+import RoleId from '@constants/ConstRole'
+import asyncHandler from '@helpers/asyncHandler'
+import permissions from '@middlewares/permission'
+import authorization from '@middlewares/authorization'
+import HttpResponse from '@modules/response/HttpResponse'
 
 router.get(
   '/user',

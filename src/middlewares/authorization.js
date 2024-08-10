@@ -52,7 +52,6 @@ function isPasswordChanged(decoded, dbUser) {
       return true
     }
   }
-  return false
 }
 
 module.exports = authorization

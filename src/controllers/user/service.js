@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt'
 import userSchema from './schema'
-import models from '/database/models/index'
-import ResponseError from '/modules/response/ResponseError'
-import PluginSqlizeQuery from '/modules/SqlizeQuery/PluginSqlizeQuery'
+import models from '@database/models/index'
+import ResponseError from '@modules/response/ResponseError'
+import PluginSqlizeQuery from '@modules/SqlizeQuery/PluginSqlizeQuery'
 
 const { User, Role } = models
 class UserService {
@@ -12,9 +12,16 @@ class UserService {
     const { filtered } = req.query
     const rawIncludes = [{ model: Role }]
 
-    const includeQueryable = PluginSqlizeQuery.makeIncludeQueryable(filtered, rawIncludes)
+    const includeQueryable = PluginSqlizeQuery.makeIncludeQueryable(
+      filtered,
+      rawIncludes
+    )
 
-    const { includeCount, ...restQuery } = PluginSqlizeQuery.generate(req, User, includeQueryable)
+    const { includeCount, ...restQuery } = PluginSqlizeQuery.generate(
+      req,
+      User,
+      includeQueryable
+    )
 
     const data = await User.findAll({
       ...restQuery,
@@ -71,9 +78,13 @@ class UserService {
 
     const value = userSchema.changePassword.validateSync(formData)
 
-    const compareOldPassword = await bcrypt.compareSync(value.oldPassword, data.password)
+    const compareOldPassword = await bcrypt.compareSync(
+      value.oldPassword,
+      data.password
+    )
 
-    if (!compareOldPassword) throw new ResponseError.BadRequest('Incorrect old password')
+    if (!compareOldPassword)
+      throw new ResponseError.BadRequest('Incorrect old password')
 
     await data.update({
       ...data,

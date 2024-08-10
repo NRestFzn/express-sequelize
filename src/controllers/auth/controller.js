@@ -1,8 +1,8 @@
-import router from 'routes/v1'
+import router from '@routes/v1'
 import AuthService from './service'
-import RoleId from 'constants/ConstRole'
-import asyncHandler from 'helpers/asyncHandler'
-import HttpResponse from 'modules/response/HttpResponse'
+import RoleId from '@constants/ConstRole'
+import asyncHandler from '@helpers/asyncHandler'
+import HttpResponse from '@modules/response/HttpResponse'
 
 router.post(
   '/login',

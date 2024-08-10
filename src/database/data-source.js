@@ -1,8 +1,7 @@
-const { blue } = require('colorette')
 const fs = require('fs')
 const path = require('path')
 const { Sequelize } = require('sequelize')
-const env = require('../config/env.config')
+const env = require('@config/env.config')
 
 const sequelizeOptions = {
   dialect: env.SEQUELIZE_CONNECTION,

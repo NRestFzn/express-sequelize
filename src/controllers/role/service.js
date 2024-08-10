@@ -1,7 +1,7 @@
 import roleSchema from './schema'
-import models from '../../database/models/index'
-import ResponseError from '../../modules/response/ResponseError'
-import PluginSqlizeQuery from '../../modules/SqlizeQuery/PluginSqlizeQuery'
+import models from '@database/models/index'
+import ResponseError from '@modules/response/ResponseError'
+import PluginSqlizeQuery from '@modules/SqlizeQuery/PluginSqlizeQuery'
 
 const { Role } = models
 class RoleService {
@@ -11,9 +11,16 @@ class RoleService {
     const { filtered } = req.query
     const rawIncludes = []
 
-    const includeQueryable = PluginSqlizeQuery.makeIncludeQueryable(filtered, rawIncludes)
+    const includeQueryable = PluginSqlizeQuery.makeIncludeQueryable(
+      filtered,
+      rawIncludes
+    )
 
-    const { includeCount, ...restQuery } = PluginSqlizeQuery.generate(req, Role, includeQueryable)
+    const { includeCount, ...restQuery } = PluginSqlizeQuery.generate(
+      req,
+      Role,
+      includeQueryable
+    )
 
     const data = await Role.findAll({
       ...restQuery,

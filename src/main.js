@@ -1,7 +1,7 @@
 const http = require('http')
-const env = require('./config/env.config')
-const { App } = require('./config/app.config')
-const { httpHandle } = require('./modules/http/http')
+const env = require('@config/env.config')
+const { App } = require('@config/app.config')
+const { httpHandle } = require('@modules/http/http')
 
 require('@babel/register')({ extensions: ['.js', '.ts'] })
 

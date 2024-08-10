@@ -7,15 +7,15 @@ import express from 'express'
 import env from './env.config'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
-import db from '../database/data-source'
-import indexRoutes from '../routes/index'
+import db from '@database/data-source'
+import indexRoutes from '@routes/index'
 import swaggerUI from 'swagger-ui-express'
 import { blue, red, cyan, green } from 'colorette'
-import ExpressErrorYup from '../middlewares/expressErrorYup'
-import ResponseError from '../modules/response/ResponseError'
-import expressErrorResponse from '../middlewares/expressErrorResponse'
-import { optionsSwaggerUI, swaggerSpec } from '../modules/docsSwagger'
-import expressErrorSequelize from '../middlewares/expressErrorSequelize'
+import ExpressErrorYup from '@middlewares/expressErrorYup'
+import ResponseError from '@modules/response/ResponseError'
+import expressErrorResponse from '@middlewares/expressErrorResponse'
+import { optionsSwaggerUI, swaggerSpec } from '@modules/docsSwagger'
+import expressErrorSequelize from '@middlewares/expressErrorSequelize'
 
 require('@babel/register')({ extensions: ['.js', '.ts'] })
 
@@ -64,7 +64,9 @@ class App {
 
       const endpoint = `${host}${url}`
 
-      throw new ResponseError.NotFound(`Sorry, the ${endpoint} HTTP method ${method} resource you are looking for was not found.`)
+      throw new ResponseError.NotFound(
+        `Sorry, the ${endpoint} HTTP method ${method} resource you are looking for was not found.`
+      )
     })
   }
 
@@ -81,7 +83,10 @@ class App {
     })
 
     this._app.use('/v1/api-docs', swaggerUI.serve)
-    this._app.get('/v1/api-docs', swaggerUI.setup(swaggerSpec, optionsSwaggerUI))
+    this._app.get(
+      '/v1/api-docs',
+      swaggerUI.setup(swaggerSpec, optionsSwaggerUI)
+    )
   }
 
   /**
