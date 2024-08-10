@@ -1,10 +1,10 @@
-import router from '@routes/v1'
+import routes from '@routes/v1'
 import AuthService from './service'
 import RoleId from '@constants/ConstRole'
 import asyncHandler from '@helpers/asyncHandler'
 import HttpResponse from '@modules/response/HttpResponse'
 
-router.post(
+routes.post(
   '/auth/login',
   asyncHandler(async function login(req, res) {
     const formData = req.body
@@ -15,7 +15,7 @@ router.post(
   })
 )
 
-router.post(
+routes.post(
   '/auth/register',
   asyncHandler(async function register(req, res) {
     const formData = req.body

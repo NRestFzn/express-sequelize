@@ -1,4 +1,4 @@
-import router from 'routes/v1'
+import routes from '@routes/v1'
 import RoleService from './service'
 import RoleId from '@constants/ConstRole'
 import asyncHandler from '@helpers/asyncHandler'
@@ -6,7 +6,7 @@ import permissions from '@middlewares/permission'
 import authorization from '@middlewares/authorization'
 import HttpResponse from '@modules/response/HttpResponse'
 
-router.get(
+routes.get(
   '/role',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -19,7 +19,7 @@ router.get(
   })
 )
 
-router.get(
+routes.get(
   '/role/:id',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -33,7 +33,7 @@ router.get(
   })
 )
 
-router.post(
+routes.post(
   '/role',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -50,7 +50,7 @@ router.post(
   })
 )
 
-router.put(
+routes.put(
   '/role/:id',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -69,7 +69,7 @@ router.put(
   })
 )
 
-router.delete(
+routes.delete(
   '/role/:id',
   authorization,
   permissions([RoleId.ADMIN]),

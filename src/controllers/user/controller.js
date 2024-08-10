@@ -1,4 +1,4 @@
-import router from '@routes/v1'
+import routes from '@routes/v1'
 import userSchema from './schema'
 import UserService from './service'
 import RoleId from '@constants/ConstRole'
@@ -7,7 +7,7 @@ import permissions from '@middlewares/permission'
 import authorization from '@middlewares/authorization'
 import HttpResponse from '@modules/response/HttpResponse'
 
-router.get(
+routes.get(
   '/user',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -20,7 +20,7 @@ router.get(
   })
 )
 
-router.get(
+routes.get(
   '/user/:id',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -34,7 +34,7 @@ router.get(
   })
 )
 
-router.post(
+routes.post(
   '/user',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -48,7 +48,7 @@ router.post(
   })
 )
 
-router.put(
+routes.put(
   '/user/:id',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -64,7 +64,7 @@ router.put(
   })
 )
 
-router.put(
+routes.put(
   '/user/change-password/:id',
   authorization,
   asyncHandler(async (req, res) => {
@@ -78,7 +78,7 @@ router.put(
   })
 )
 
-router.delete(
+routes.delete(
   '/user/:id',
   authorization,
   permissions([RoleId.ADMIN]),
@@ -93,7 +93,7 @@ router.delete(
   })
 )
 
-router.get(
+routes.get(
   '/user-me',
   authorization,
   asyncHandler(async (req, res) => {
@@ -107,7 +107,7 @@ router.get(
   })
 )
 
-router.put(
+routes.put(
   '/user-me/update',
   authorization,
   asyncHandler(async (req, res) => {
@@ -133,7 +133,7 @@ router.put(
   })
 )
 
-router.put(
+routes.put(
   '/user-me/change-password',
   authorization,
   asyncHandler(async (req, res) => {
