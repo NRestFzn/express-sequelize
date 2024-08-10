@@ -41,7 +41,7 @@ yarn start
 ```
 
 **##Penting**
-**_##UnNecessary_**
+**_##Necessary_**
 
 - Swagger Docs :
 
@@ -56,12 +56,6 @@ npm run db:create
 ```
 
 - Migrate migrations file
-
-```sh
-npm run db:migrate
-```
-
-- Generate sample data
 
 ```sh
 npm run db:migrate
@@ -85,14 +79,14 @@ npm run db:migrate:refresh
 npm run db:reset
 ```
 
-- If you using handlebars with tailwind css, use this script
+- If you using handlebars with tailwind css, use this script for every tailwind css update
 
 ```sh
 npm run tailwind:build
 ```
 
 **##Gak penting**
-**_##UnNecessary_**
+**_##Necessary_**
 
 ```sh
 If you have any suggestion or wanna ask something, don't hesitate to ask.
