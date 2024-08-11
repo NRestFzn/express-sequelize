@@ -2,6 +2,7 @@
 ```
 - Docs Swagger
 - Upload File With Multer
+- Google and Facebook Auth
 - SendMail using NodeMailer(On Progress)
 ```
 
