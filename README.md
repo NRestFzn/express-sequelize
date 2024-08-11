@@ -1,32 +1,21 @@
-**Features**
+**##Features**
 ```
 - Docs Swagger
 - Upload File With Multer
 - SendMail using NodeMailer(On Progress)
 ```
 
-**##Cara Pemakaian**
-**_##How to use_**
+**##How to use**
 
-ID - clone dengan `https` / `ssh` / `github cli`
-
-_EN - clone with `https` / `ssh` / `github cli`_
+clone with `https` / `ssh` / `github cli`_
 
 ```sh
 git clone https://github.com/NRestFzn/express-sequelize.git
 ```
 
-ID - Jika sudah di clone, buat file .env lalu copy semua yang ada di file .env.example lalu paste di file .env nya.
+_After you clone this repository make sure you make .env file, then copy everything from .env.example file and paste it to .env file._
 
-_EN - After you clone this repository make sure you make .env file, then copy everything from .env.example file and paste it to .env file._
-
-**Install package package penting**
-**_##Install required packages_**
-
-ID - Sebelum melakukan menjalankan aplikasi, pastikan jalankan script ini
-di terminal terlebih dahulu
-
-_EN - Before using the app, run this script first on your terminal_
+**##Install required packages**
 
 ```sh
 npm install
@@ -35,9 +24,7 @@ or
 
 yarn
 ```
-
-**##Jalankan aplikasi nya menggunakan script ini**
-**_##Run the app using this script_**
+**##Run the app using this script**
 
 ```sh
 npm run start
@@ -47,8 +34,7 @@ or
 yarn start
 ```
 
-**##Penting**
-**_##Necessary_**
+**##Necessary**
 
 - Swagger Docs :
 
@@ -86,18 +72,8 @@ npm run db:migrate:refresh
 npm run db:reset
 ```
 
-- If you using handlebars with tailwind css, use this script for every tailwind css update
+- If you're using template engines such as handlebars or ejs with tailwind css, use this script for every tailwind css update
 
 ```sh
 npm run tailwind:build
-```
-
-**##Gak penting**
-**_##Necessary_**
-
-```sh
-If you have any suggestion or wanna ask something, don't hesitate to ask.
-Contact me : nashirresta7@gmail.com
-
-thank you~~ :)
 ```
