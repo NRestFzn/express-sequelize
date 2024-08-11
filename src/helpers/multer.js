@@ -56,11 +56,6 @@ const useMulter = (props) => {
   // always check destination
   const destination = props.dest ?? defaultDestination
 
-  if (!fs.existsSync(path.resolve(destination))) {
-    fs.mkdirSync(destination, { recursive: true })
-    console.log('path', `created directory ${destination}`)
-  }
-
   // config storage
   const storage = multer.diskStorage({
     destination,

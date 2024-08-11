@@ -4,22 +4,21 @@ import { useMulter, getDefaultUploadFileOptions } from '@helpers/multer'
 
 const uploadFile = useMulter(
   getDefaultUploadFileOptions({
-    dest: 'public/uploads/avatar',
-    onlyImages: true,
+    dest: 'public/uploads',
   })
-).fields([{ name: 'avatar', maxCount: 2 }])
+).fields([{ name: 'file', maxCount: 2 }])
 
 const setFileToBody = asyncHandler(async function setFileToBody(
   req,
   res,
   next
 ) {
-  req.body.avatar = req.files.avatar
+  req.body.file = req.files.file
   next()
 })
 
 routes.post(
-  '/upload-avatar',
+  '/upload',
   uploadFile,
   setFileToBody,
   asyncHandler(async (req, res) => {
