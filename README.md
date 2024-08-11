@@ -1,3 +1,10 @@
+**Features**
+```
+- Docs Swagger
+- Upload File With Multer
+- SendMail using NodeMailer(On Progress)
+```
+
 **##Cara Pemakaian**
 **_##How to use_**
 
