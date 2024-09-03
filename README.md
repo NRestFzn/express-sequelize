@@ -1,14 +1,15 @@
 **##Features**
+
 ```
 - Docs Swagger
-- Upload File With Multer
-- Google and Facebook Auth
-- SendMail using NodeMailer(On Progress)
+- Upload File with Multer
+- MiddleWare Auth with JsonWebToken(JWT)
+- SendMail using NodeMailer
 ```
 
 **##How to use**
 
-clone with `https` / `ssh` / `github cli`_
+clone with `https` / `ssh` / `github cli`\_
 
 ```sh
 git clone https://github.com/NRestFzn/express-sequelize.git
@@ -25,6 +26,7 @@ or
 
 yarn
 ```
+
 **##Run the app using this script**
 
 ```sh

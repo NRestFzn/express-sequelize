@@ -95,6 +95,18 @@ const databaseEnv = {
   SEQUELIZE_TIMEZONE: getEnv('SEQUELIZE_TIMEZONE', 'Asia/Jakarta'),
 }
 
+/**
+ * Nodemailer Env
+ */
+const nodemailerEnv = {
+  MAIL_SERVICE: getEnv('MAIL_SERVICE'),
+  MAIL_HOST: getEnv('MAIL_HOST'),
+  MAIL_PORT: getEnv('MAIL_PORT'),
+  MAIL_AUTH_TYPE: getEnv('MAIL_AUTH_TYPE'),
+  MAIL_USERNAME: getEnv('MAIL_USERNAME'),
+  MAIL_PASSWORD: getEnv('MAIL_PASSWORD'),
+}
+
 module.exports = {
   ...appEnv,
   ...secretEnv,
@@ -102,4 +114,5 @@ module.exports = {
   ...baseURLEnv,
   ...googleOAuthEnv,
   ...facebookAuthEnv,
+  ...nodemailerEnv,
 }

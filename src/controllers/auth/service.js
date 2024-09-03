@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
 import authSchema from './schema'
 import env from '@config/env.config'
-import models from '@database/models'
 import { compareSync } from 'bcrypt'
-import db from '@database/data-source'
+import models from '@database/models'
+import sendMail from '@modules/sendMail'
 import ResponseError from '@modules/response/ResponseError'
 
 const { User } = models
@@ -37,6 +37,8 @@ class AuthService {
     const value = authSchema.register.validateSync(formData)
 
     const data = await User.create({ ...value }, { transaction })
+
+    await sendMail.registerAccount(data.email, data.fullname)
 
     await transaction.commit()
 
