@@ -22,6 +22,8 @@ routes.post(
   uploadFile,
   setFileToBody,
   asyncHandler(async (req, res) => {
-    res.status(200).json({ msg: req.body })
+    const data = req.body.file
+
+    res.status(200).json({ data })
   })
 )
