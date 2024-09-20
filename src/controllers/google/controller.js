@@ -15,7 +15,7 @@ routes.get(
 
     const register = req.query.register
 
-    const txn = await db.sequelize.transaction()
+    const txn = await req.transaction
 
     let redirect_uri = env.GOOGLE_OAUTH_LOGIN_URL
 

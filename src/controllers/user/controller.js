@@ -56,7 +56,9 @@ routes.put(
     const { id } = req.params
     const formData = req.body
 
-    await UserService.update(id, formData)
+    const txn = await req.transaction
+
+    await UserService.update(id, formData, txn)
 
     const httpResponse = HttpResponse.updated()
 
@@ -70,7 +72,11 @@ routes.put(
   asyncHandler(async (req, res) => {
     const { id } = req.params
 
-    await UserService.changePassword(id, req.body)
+    const formData = req.body
+
+    const txn = await req.transaction
+
+    await UserService.changePassword(id, formData, txn)
 
     const httpResponse = HttpResponse.updated({})
 
@@ -85,7 +91,9 @@ routes.delete(
   asyncHandler(async (req, res) => {
     const { id } = req.params
 
-    await UserService.delete(id)
+    const txn = await req.transaction
+
+    await UserService.delete(id, txn)
 
     const httpResponse = HttpResponse.deleted()
 
@@ -113,6 +121,8 @@ routes.put(
   asyncHandler(async (req, res) => {
     const user = req.user
 
+    const txn = await req.transaction
+
     const data = await UserService.findById(user.id)
 
     const formData = {
@@ -122,12 +132,17 @@ routes.put(
 
     const value = userSchema.update.validateSync(formData)
 
-    await data.update({
-      ...data,
-      ...value,
-    })
+    await data.update(
+      {
+        ...data,
+        ...value,
+      },
+      { transaction: txn }
+    )
 
     const httpResponse = HttpResponse.updated({})
+
+    await txn.commit()
 
     res.status(200).json(httpResponse)
   })
@@ -139,7 +154,9 @@ routes.put(
   asyncHandler(async (req, res) => {
     const user = req.user
 
-    await UserService.changePassword(user.id, req.body)
+    const txn = await req.transaction
+
+    await UserService.changePassword(user.id, req.body, txn)
 
     const httpResponse = HttpResponse.updated({})
 

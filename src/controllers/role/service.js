@@ -52,6 +52,8 @@ class RoleService {
 
     const data = await Role.create(value, { transaction })
 
+    await transaction.commit()
+
     return data
   }
 
@@ -61,12 +63,16 @@ class RoleService {
     const value = roleSchema.create.validateSync(formData)
 
     await data.update(value, { transaction })
+
+    await transaction.commit()
   }
 
   static async delete(id, transaction) {
     const data = await this.findById(id)
 
     await data.destroy(id, { transaction })
+
+    await transaction.commit()
   }
 }
 
