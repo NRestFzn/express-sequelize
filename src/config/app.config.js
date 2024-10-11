@@ -17,6 +17,7 @@ import expressErrorResponse from '@middlewares/expressErrorResponse'
 import { optionsSwaggerUI, swaggerSpec } from '@modules/docsSwagger'
 import expressErrorSequelize from '@middlewares/expressErrorSequelize'
 import expressAutoHandlerTransaction from '@middlewares/expressAutoHandlerTransaction'
+import Jobs from '../jobs/index'
 
 require('@babel/register')({ extensions: ['.js', '.ts'] })
 
@@ -28,6 +29,7 @@ class App {
     this._app = express()
     this._port = env.APP_PORT
     this._plugin()
+    this._provider()
     this._swagger()
     this._database()
     this._routes()
@@ -49,6 +51,14 @@ class App {
     this._app.engine('ejs', ejs.renderFile)
     this._app.set('views', path.join(`${__dirname}/../../public/views`))
     this._app.set('view engine', 'ejs')
+  }
+
+  /**
+   * Provider
+   */
+
+  _provider() {
+    Jobs.initialize()
   }
 
   /**
